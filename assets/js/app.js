@@ -8,7 +8,7 @@ import FooterLayout from 'views/layout/footer';
 import router from './routes';
 
 //**********全局状态
-_extend(app, {
+app.page = {
   state: {},
   shares: {},
   getWidth: function () {
@@ -17,7 +17,7 @@ _extend(app, {
   getHeight: function () {
     return document.body.offsetHeight;
   }
-});
+};
 
 //**********config
 Vue.config.devtools = false;
@@ -28,7 +28,7 @@ Vue.component('layout-footer', FooterLayout);
 //**********Page
 Vue.mixin({
   data: function () {
-    return app.state;
+    return app.app.state;
   },
   mounted: function () {
     this.$options.resize.call(this, false);

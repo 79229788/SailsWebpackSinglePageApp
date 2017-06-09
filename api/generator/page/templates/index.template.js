@@ -9,8 +9,8 @@ import Vue from 'vue';
 //**********************************************************************页面模块共享状态
 //**************************************************************
 //**************************************************************
-app.shares.<%=camelname%>Event = new Vue();
-app.shares.<%=camelname%>Store = {
+app.page.shares.<%=camelname%>Event = new Vue();
+app.page.shares.<%=camelname%>Store = {
   state: {}
 };
 
