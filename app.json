@@ -1,0 +1,7 @@
+{
+  "apps": [{
+    "name"    : "app",
+    "script"  : "./app.js",
+    "args"    : "['--prod']"
+  }]
+}

@@ -1,0 +1,45 @@
+@import "source.scss";
+
+html{margin: 0;}
+body{padding:0;background:transparent;position:relative;z-index: 2;-webkit-user-select:auto;margin:0;overflow:hidden;overflow-y: auto; min-height:20px;@include box-sizing(border-box);color: #555;font-size: 1em;}
+body:after{content:"";display:block;clear:both;}
+body, body:focus{outline: transparent solid 0;}
+body{position: relative; -webkit-user-select: auto; background: 0 0;}
+body [contenteditable="false"]{-webkit-user-select: none;}
+body [contenteditable="true"]{outline: transparent solid 0;}
+body a{-webkit-user-select: auto;}
+body p{margin: 6px 0;}
+body strong{font-weight: 700;}
+body ul{padding: 0;margin: 0;}
+body ul li{list-style: none;}
+body table{border: 0; border-collapse: collapse; empty-cells: show; max-width: 100%;margin-bottom: 10px;}
+body table tr{-webkit-user-select: none;}
+body table td, body table th{-webkit-user-select: text;}
+body table td, body table th{border: 1px solid rgb(221, 221, 221);}
+body table td:empty, body table th:empty{height: 20px;}
+body table th{background: rgb(230, 230, 230);}
+body hr{clear: both; -webkit-user-select: none; break-after: page;}
+body pre{white-space: pre-wrap; word-wrap: break-word;}
+body[dir="rtl"] blockquote{border-left-width: 0; border-right-width: 2px; border-right-style: solid; border-right-color: rgb(94, 53, 177); margin-right: 0; padding-right: 5px; padding-left: 0;}
+body[dir="rtl"] blockquote blockquote{border-color: rgb(0, 188, 212);}
+body[dir="rtl"] blockquote blockquote blockquote{border-color: rgb(67, 160, 71);}
+body blockquote{border-left-width: 2px; border-left-style: solid; border-left-color: rgb(94, 53, 177); margin-left: 0; padding-left: 5px; color: rgb(94, 53, 177);}
+body blockquote blockquote{border-color: rgb(0, 188, 212); color: rgb(0, 188, 212);}
+body blockquote blockquote blockquote{border-color: rgb(67, 160, 71); color: rgb(67, 160, 71);}
+
+.hide{display: none}
+.clear{clear: both;}
+.fl-left{float: left;}
+.fl-right{float: right;}
+
+//**********iconfont
+@font-face {font-family: 'iconfont'; src: url('../fonts/iconfont.ttf')}
+.iconfont{
+  font-family:'iconfont' !important;
+  font-size:1.1875rem;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: middle;
+  display: inline-block;
+}
