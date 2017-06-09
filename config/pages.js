@@ -25,7 +25,7 @@ module.exports.pages = {
       mainJs: '/app.js',
       otherJs: ['pub'],
       isStatic: false,
-      title: '首页',
+      title: '单页',
       keywords: [],
       description: '',
     }

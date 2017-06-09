@@ -1,5 +1,5 @@
 {% extends 'layout/layout.swig' %}
-{% block title %}首页{% endblock %}
+{% block title %}单页{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 {% block stylesheets %}

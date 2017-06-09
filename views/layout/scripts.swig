@@ -1,5 +1,6 @@
 <script id="config-script">
   var app = {};
+  app.page = {};
   app.debug = {{ JSON.stringify(sails.debug) }};
   app.device = {{ JSON.stringify(device) }};
   app.macros = {{ JSON.stringify(sails.publicMacros) }};
