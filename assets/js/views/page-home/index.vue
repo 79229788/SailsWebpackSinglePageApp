@@ -3,14 +3,14 @@
 </template>
 
 <script>
-  require('styles/page-test1.scss');
+  require('styles/page-home.scss');
   import Vue from 'vue';
 
   //**********************************************************************页面模块共享状态
   //**************************************************************
   //**************************************************************
-  app.page.shares.test1Event = new Vue();
-  app.page.shares.test1Store = {
+  app.page.shares.homeEvent = new Vue();
+  app.page.shares.homeStore = {
     state: {}
   };
 
@@ -18,7 +18,7 @@
   //**************************************************************
   //**************************************************************
   //**********XX模块
-  Vue.component('module-module1', require('views/page-test1/module1'));
+  Vue.component('module-module1', require('views/page-home/module1'));
 
 </script>
 

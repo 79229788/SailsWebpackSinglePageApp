@@ -11,25 +11,13 @@
 
 const xmlParser = require('express-xml-bodyparser')();
 const skipper = require('skipper')();
-const history = require('connect-history-api-fallback');
 const _ = require('lodash');
 
 module.exports.http = {
 
   //**********自定义中间件
   customMiddleware: function(app){
-    //重写后端路由（以后端路由优先，单页面开发请按需配置后端路由）
-    const rewrites = [];
-    _.each(sails.config.routes, function (value, key) {
-      if(_.isObject(value) && value.view && key !== '/') {
-        const reg = new RegExp(key);
-        rewrites.push({from: reg, to: key});
-      }
-    });
-    app.use(history({
-      index: '/',
-      rewrites: rewrites
-    }));
+
   },
 
   //**********支持[text/xml]形式的请求

@@ -28,6 +28,16 @@ module.exports.pages = {
       title: '单页',
       keywords: [],
       description: '',
+    },
+    {
+      name: 'page-login',
+      mainHtml: '/page-login.swig',
+      mainJs: '/views/page-login/index.js',
+      otherJs: ['pub'],
+      isStatic: false,
+      title: '登陆',
+      keywords: [],
+      description: '',
     }
   ]
 };
