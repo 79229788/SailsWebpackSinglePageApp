@@ -28,7 +28,7 @@ Vue.component('layout-footer', FooterLayout);
 //**********Page
 Vue.mixin({
   data: function () {
-    return app.app.state;
+    return app.page.state;
   },
   mounted: function () {
     this.$options.resize.call(this, false);

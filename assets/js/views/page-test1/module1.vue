@@ -13,8 +13,8 @@
 <script>
   import Vue from 'vue';
 
-  const sharedEvent = app.shares.test1Event;
-  const sharedState = app.shares.test1Store.state;
+  const sharedEvent = app.page.shares.test1Event;
+  const sharedState = app.page.shares.test1Store.state;
   export default {
     data: function () {
       return {
