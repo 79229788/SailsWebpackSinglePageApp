@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import _extend from 'lodash/extend';
 import _throttle from 'lodash/throttle';
 
 import HeaderLayout from 'views/layout/header';
