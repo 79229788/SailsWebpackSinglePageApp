@@ -11,7 +11,6 @@
 
 const xmlParser = require('express-xml-bodyparser')();
 const skipper = require('skipper')();
-const _ = require('lodash');
 
 module.exports.http = {
 
