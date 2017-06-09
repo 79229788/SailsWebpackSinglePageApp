@@ -22,7 +22,7 @@ module.exports.http = {
     const rewrites = [];
     _.each(sails.config.routes, function (value, key) {
       if(_.isObject(value) && value.view && key !== '/') {
-        const reg = new RegExp(key + '$');
+        const reg = new RegExp(key);
         rewrites.push({from: reg, to: key});
       }
     });
