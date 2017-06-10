@@ -32,12 +32,13 @@ sails lift --prod --deploy  //生产部署模式   （webpack打包所有资源�
 sails lift --only --deploy  //仅仅部署       （一般当生产部署模式中cdn上传失败时，才使用此命令，仅重新执行了api/deploy/index.js）
 ```
 
-### 4. 生成器 [浏览官方文档--自带生成器](http://sailsjs.com/documentation/reference/command-line-interface/sails-generate)
+### 4. 生成器 
 
 ```
 sails generagte page        //生成新页面文件(单页面的content部分)
 sails generagte ...         //sails自带生成器，省略..
 ```
+###### [浏览官方文档--自带生成器，点击查看](http://sailsjs.com/documentation/reference/command-line-interface/sails-generate)
 
 ### 5. 相关配置
 
