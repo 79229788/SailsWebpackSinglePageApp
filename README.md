@@ -51,17 +51,17 @@ sails generagte ...         //sails自带生成器，[浏览官方文档](http:/
       scripts: {
         'pub': ['./assets/js/app.js'],
       },
-      //页面配置列表
+      //页面配置列表(一般情况下单页只需一个主page，如需单页和多页兼并，则在下面数组进行其它页面配置)
       pages: [
         {
-          name: 'page-home',            //页面名
-          mainHtml: '/page-home.swig',  //页面主html文件
-          mainJs: '/page-home/main.js', //页面主js文件
-          otherJs: ['pub'],             //所需的公共模块
-          isStatic: false,              //该页面是否为静态页面。①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用
-          title: '首页',                 //页面标题
-          keywords: null,               //页面SEO关键词
-          description: null,            //页面SEO描述
+          name: 'app',                 //页面名
+          mainHtml: '/app.swig',       //页面主html文件
+          mainJs: 'app.js',            //页面主js文件
+          otherJs: ['pub'],            //所需的公共模块
+          isStatic: false,             //该页面是否为静态页面。①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用
+          title: '单页',                //页面标题
+          keywords: null,              //页面SEO关键词
+          description: null,           //页面SEO描述
         }
       ]
     }
