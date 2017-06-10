@@ -25,7 +25,7 @@
     //**************************************************************
     //**************************************************************
     components: {
-      'module-module1': require('views/page-home/module1')
+      'module-module1': require('views/page-home/modules/module1')
     }
   }
 

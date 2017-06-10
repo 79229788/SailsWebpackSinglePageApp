@@ -25,7 +25,7 @@ export default {
   //**************************************************************
   //**************************************************************
   components: {
-    'module-module1': require('views/<%=filename%>/module1')
+    'module-module1': require('views/<%=filename%>/modules/module1')
   }
 }
 

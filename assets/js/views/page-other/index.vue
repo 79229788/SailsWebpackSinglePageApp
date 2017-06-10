@@ -25,7 +25,7 @@ export default {
   //**************************************************************
   //**************************************************************
   components: {
-    'module-module1': require('views/page-other/module1')
+    'module-module1': require('views/page-other/modules/module1')
   }
 }
 

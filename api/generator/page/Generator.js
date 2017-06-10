@@ -55,7 +55,7 @@ module.exports = {
   targets: {
     //'./test': { template: 'swig.template.js' },
     './assets/js/views/:filename/index.vue': { template: 'index.template.js' },
-    './assets/js/views/:filename/module1.vue': { template: 'module.template.js' },
+    './assets/js/views/:filename/modules/module1.vue': { template: 'module.template.js' },
   },
 
 
