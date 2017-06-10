@@ -1,9 +1,15 @@
+<style lang="scss">
+  @import "../../../styles/source.scss";
+
+</style>
+
 <template>
-  <module-module1></module-module1>
+  <div class="modules">
+    <module-module1></module-module1>
+  </div>
 </template>
 
 <script>
-  require('styles/page-home.scss');
   import Vue from 'vue';
 
   //**********************************************************************页面模块共享状态
@@ -14,11 +20,14 @@
     state: {}
   };
 
-  //**********************************************************************注册页面模块
-  //**************************************************************
-  //**************************************************************
-  //**********XX模块
-  Vue.component('module-module1', require('views/page-home/module1'));
+  export default {
+    //**********************************************************************注册页面模块
+    //**************************************************************
+    //**************************************************************
+    components: {
+      'module-module1': require('views/page-home/module1')
+    }
+  }
 
 </script>
 

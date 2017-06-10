@@ -5,7 +5,7 @@
 
 <template>
   <section id="module1">
-    <p>this is module1 content</p>
+    <p>this is module1 content from home page</p>
     <p>timer: {{ count }}</p>
   </section>
 </template>

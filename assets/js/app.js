@@ -1,3 +1,4 @@
+import 'styles/page.scss';
 import Vue from 'vue';
 import _throttle from 'lodash/throttle';
 

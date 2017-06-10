@@ -8,7 +8,14 @@
 
 <template>
   <div id="header">
-    <p>a public header</p>
+    <div>
+      <p>a public header</p>
+      <p>timer: {{ count }}</p>
+      <p>
+        <router-link to="/">home</router-link>
+        <router-link to="/other">other</router-link>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -17,11 +24,13 @@
   export default {
     data: function () {
       return {
-
+        count: 0,
       }
     },
     created: function () {
-
+      setInterval(() => {
+        this.count++;
+      }, 1000);
     },
     methods: {
       //*********************************内置方法

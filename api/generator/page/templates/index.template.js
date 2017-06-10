@@ -1,9 +1,15 @@
+<style lang="scss">
+  @import "../../../styles/source.scss";
+
+</style>
+
 <template>
-<module-module1></module-module1>
+  <div class="modules">
+    <module-module1></module-module1>
+  </div>
 </template>
 
 <script>
-require('styles/<%=filename%>.scss');
 import Vue from 'vue';
 
 //**********************************************************************页面模块共享状态

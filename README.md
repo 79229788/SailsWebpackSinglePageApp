@@ -6,7 +6,8 @@ An Empty Sails Application [sails文档请点击查看](http://sailsjs.org)
 
 > * sails + swig -------------- //node框架、模板引擎
 > * webpack ----------------- //构建、模块化、打包工具
-
+> * vue ------------------------ //前端框架
+> * vue-router --------------- //前端路由
 
 ### 2. 全局安装项目
 
@@ -29,6 +30,13 @@ sails lift --prod           //普通生产模式   （webpack打包所有资源�
 sails lift --prod --fast    //极速生产模式   (webpack不进行打包，.tmp网站目录不会生成任何文件，需要结合cdn部署，cdn源站地址请在config/macros.js中设置)
 sails lift --prod --deploy  //生产部署模式   （webpack打包所有资源至www文件夹 + cdn网络部署(需自行在api/deploy/index.js中实现上传整个www目录文件至cdn源站)））
 sails lift --only --deploy  //仅仅部署       （一般当生产部署模式中cdn上传失败时，才使用此命令，仅重新执行了api/deploy/index.js）
+```
+
+### 4. 生成器
+
+```
+sails generagte page        //生成新页面文件(单页面的content部分)
+sails generagte ...         //sails自带生成器，[浏览官方文档](http://sailsjs.com/documentation/reference/command-line-interface/sails-generate)
 ```
 
 ### 5. 相关配置
