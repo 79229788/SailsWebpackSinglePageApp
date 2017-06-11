@@ -51,7 +51,8 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'babel-loader',
           options: {
             sourceMap: false,
-            presets: ['es2015']
+            presets: ['es2015'],
+            plugins: ['syntax-dynamic-import']
           },
         }
       },

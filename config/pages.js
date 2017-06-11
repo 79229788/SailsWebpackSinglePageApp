@@ -32,7 +32,7 @@ module.exports.pages = {
     {
       name: 'page-login',
       mainHtml: '/page-login.swig',
-      mainJs: '/views/page-login/index.js',
+      mainJs: '/views/page-login/main.js',
       otherJs: ['pub'],
       isStatic: false,
       title: '登陆',
