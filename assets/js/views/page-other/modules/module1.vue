@@ -1,13 +1,13 @@
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../../../styles/source.scss";
-  #module{
-
+  #module1{
+    em{color: #00bcd4;font-style: normal;}
   }
 </style>
 
 <template>
   <section id="module1">
-    <p>this is module1 content form other page</p>
+    <p>this is module1 content from <em>other</em> page</p>
     <p>timer: {{ count }}</p>
   </section>
 </template>

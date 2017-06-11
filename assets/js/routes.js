@@ -3,11 +3,12 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: resolve => require(['views/page-home'], resolve) },
-  { path: '/other', component: resolve => require(['views/page-other'], resolve) }
+  { path: '/', name: 'home', component: r => require.ensure([], () => r(require('./views/page-home')), 'page-home') },
+  { path: '/other', name: 'other', component: r => require.ensure([], () => r(require('./views/page-other')), 'page-other') }
 ];
 
 export default new VueRouter({
   mode: 'history',
   routes: routes
 });
+
