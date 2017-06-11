@@ -22,7 +22,8 @@ export default new VueRouter({
         ).then(function (data) {
           resolve(data);
         });
-      }
+      },
+      meta: value.meta,
     };
   })
 });
