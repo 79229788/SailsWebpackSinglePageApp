@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = {
    '/'              : {view: 'page-home'},
-   '/other'         : {view: 'page-other'},
+   '/other'         : {view: 'page-other', meta: {keepAlive: true}},
 };
 
 export default new VueRouter({
