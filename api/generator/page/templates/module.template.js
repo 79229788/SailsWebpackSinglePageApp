@@ -1,12 +1,12 @@
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../../../styles/source.scss";
-  #module{
+  #<%=modulename%>{
 
   }
 </style>
 
 <template>
-  <section id="module1">
+  <section id="<%=modulename%>">
 
   </section>
 </template>
@@ -14,8 +14,8 @@
 <script>
   import Vue from 'vue';
 
-  const sharedEvent = app.page.shares.<%=camelname%>Event;
-  const sharedStore = app.page.shares.<%=camelname%>Store;
+  const sharedEvent = app.page.shares.<%=fileCamelName%>Event;
+  const sharedStore = app.page.shares.<%=fileCamelName%>Store;
   export default {
     data: function () {
       return {
@@ -24,7 +24,7 @@
       }
     },
     created: function () {
-      sharedStore.setModule1(this);
+      sharedStore.set<%=moduleFullCamelName%>(this);
     },
     mounted: function () {},
     methods: {

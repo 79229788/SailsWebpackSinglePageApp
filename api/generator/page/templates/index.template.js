@@ -5,7 +5,7 @@
 
 <template>
   <div class="modules">
-    <module-module1></module-module1>
+    <module-<%=modulename%>></module-<%=modulename%>>
   </div>
 </template>
 
@@ -15,27 +15,27 @@ import Vue from 'vue';
 //**********************************************************************页面模块共享状态
 //**************************************************************
 //**************************************************************
-app.page.shares.<%=camelname%>Event = new Vue();
-app.page.shares.<%=camelname%>Store = {
+app.page.shares.<%=fileCamelName%>Event = new Vue();
+app.page.shares.<%=fileCamelName%>Store = {
   state: {
-   module1: null,
+    <%=moduleCamelName%>: null,
   },
-  setModule1: function (vm) {
-    this.state.module1 = vm;
+  set<%=moduleFullCamelName%>: function (vm) {
+    this.state.<%=moduleCamelName%> = vm;
   }
 };
 
 export default {
   data: function () {
     return {
-      sharedState: app.page.shares.<%=camelname%>Store.state
+      sharedState: app.page.shares.<%=fileCamelName%>Store.state
     }
   },
   //**********************************************************************注册页面模块
   //**************************************************************
   //**************************************************************
   components: {
-    'module-module1': require('views/<%=filename%>/modules/module1')
+    'module-<%=modulename%>': require('views/<%=filename%>/modules/<%=modulename%>')
   }
 }
 

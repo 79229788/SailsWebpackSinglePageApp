@@ -36,13 +36,24 @@ module.exports = {
     _.defaults(scope, {createdAt: new Date()});
     //设置模板变量
     scope.filename = 'page-' + scope.args[0];
-    const sections = scope.args[0].split('-').map(function (section, index) {
+    scope.modulename = (scope.args[1] || 'name');
+    //文件名驼峰命名
+    const fileSections = scope.args[0].split('-').map(function (section, index) {
       if(index > 0) {
         return section.substring(0, 1).toUpperCase() + section.substring(1);
       }
       return section;
     });
-    scope.camelname = sections.join('');
+    scope.fileCamelName = fileSections.join('');
+    //模块名驼峰命名
+    const moduleSections = scope.modulename.split('-').map(function (section, index) {
+      if(index > 0) {
+        return section.substring(0, 1).toUpperCase() + section.substring(1);
+      }
+      return section;
+    });
+    scope.moduleCamelName = moduleSections.join('');
+    scope.moduleFullCamelName = scope.moduleCamelName.substring(0, 1).toUpperCase() + scope.moduleCamelName.substring(1);
 
     cb();
   },
@@ -55,7 +66,7 @@ module.exports = {
   targets: {
     //'./test': { template: 'swig.template.js' },
     './assets/js/views/:filename/index.vue': { template: 'index.template.js' },
-    './assets/js/views/:filename/modules/module1.vue': { template: 'module.template.js' },
+    './assets/js/views/:filename/modules/:modulename.vue': { template: 'module.template.js' },
   },
 
 
