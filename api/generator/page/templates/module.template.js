@@ -15,11 +15,11 @@
   import Vue from 'vue';
 
   const sharedEvent = app.page.shares.<%=camelname%>Event;
-  const sharedState = app.page.shares.<%=camelname%>Store.state;
+  const sharedStore = app.page.shares.<%=camelname%>Store;
   export default {
     data: function () {
       return {
-        sharedState: sharedState,
+        sharedState: sharedStore.state,
 
       }
     },
