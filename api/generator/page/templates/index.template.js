@@ -17,7 +17,12 @@ import Vue from 'vue';
 //**************************************************************
 app.page.shares.<%=camelname%>Event = new Vue();
 app.page.shares.<%=camelname%>Store = {
-  state: {}
+  state: {
+   module1: null,
+  },
+  setModule1: function (vm) {
+    this.state.module1 = vm;
+  }
 };
 
 export default {

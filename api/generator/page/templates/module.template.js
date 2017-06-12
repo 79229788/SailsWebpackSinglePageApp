@@ -23,7 +23,9 @@
 
       }
     },
-    created: function () {},
+    created: function () {
+      sharedStore.setModule1(this);
+    },
     mounted: function () {},
     methods: {
       //*********************************内置方法
