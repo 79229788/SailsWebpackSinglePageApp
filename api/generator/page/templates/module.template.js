@@ -1,12 +1,12 @@
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../../../styles/source.scss";
-  #<%=modulename%>{
+  .<%=name%>-<%=modulename%>{
 
   }
 </style>
 
 <template>
-  <section id="<%=modulename%>">
+  <section class="<%=name%>-<%=modulename%> <%=modulename%>">
 
   </section>
 </template>

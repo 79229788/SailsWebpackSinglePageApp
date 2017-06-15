@@ -4,7 +4,7 @@
 </style>
 
 <template>
-  <div class="modules">
+  <div class="modules <%=filename%>">
     <module-<%=modulename%>></module-<%=modulename%>>
   </div>
 </template>

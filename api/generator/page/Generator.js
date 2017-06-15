@@ -35,7 +35,8 @@ module.exports = {
     if (!scope.rootPath) return cb( INVALID_SCOPE_VARIABLE('rootPath') );
     _.defaults(scope, {createdAt: new Date()});
     //设置模板变量
-    scope.filename = 'page-' + scope.args[0];
+    scope.name = scope.args[0];
+    scope.filename = 'page-' + scope.name;
     scope.modulename = (scope.args[1] || 'name');
     //文件名驼峰命名
     const fileSections = scope.args[0].split('-').map(function (section, index) {
