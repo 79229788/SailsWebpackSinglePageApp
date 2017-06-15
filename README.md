@@ -1,6 +1,6 @@
-# SailsWebpackSinglePageApp
+# SailsWebpackSPA
 
-An Empty Sails Application [sails文档请点击查看](http://sailsjs.org)
+An Empty Sails Single Page Application [sails文档请点击查看](http://sailsjs.org)
 
 ### 1. 清单
 

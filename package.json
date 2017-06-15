@@ -1,8 +1,8 @@
 {
-  "name": "SailsWebpackSinglePageApp",
+  "name": "SailsWebpackSPA",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "An Empty Sails Single Page Application",
   "keywords": [],
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -59,7 +59,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/duyang/SailsWebpackApp.git"
+    "url": "git://github.com/duyang/SailsWebpackSPA.git"
   },
   "author": "duyang",
   "license": ""
