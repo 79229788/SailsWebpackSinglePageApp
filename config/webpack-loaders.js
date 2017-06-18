@@ -27,7 +27,7 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'vue-loader',
           options: {
             loaders: {
-              js: 'babel-loader?presets[]=es2015',
+              js: 'babel-loader?presets[]=es2015&plugins[]=syntax-dynamic-import',
               css: ExtractTextPlugin.extract({
                 use: 'css-loader',
                 fallback: 'vue-style-loader'
