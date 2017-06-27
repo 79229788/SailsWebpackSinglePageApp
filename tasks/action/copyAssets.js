@@ -9,7 +9,7 @@ module.exports = function (gulp, sails) {
       `!${sails.paths.assets}/{libs,libs/**}`,
       `!${sails.paths.assets}/{styles,styles/**}`,
       `!${sails.paths.assets}/{templates,templates/**}`
-    ]).pipe(gulp.dest(sails.config.deploy ? sails.paths.www : sails.paths.tmpAssets));
+    ]).pipe(gulp.dest(sails.config.deploy ? sails.paths.wwwAssets : sails.paths.tmpAssets));
   });
   return gulp;
 };
