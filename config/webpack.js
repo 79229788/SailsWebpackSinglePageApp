@@ -102,7 +102,7 @@ module.exports.webpack = function (sails) {
         },
         entry: webpackEntry,
         output: {
-          path: sails.config.deploy ? sails.paths.www : sails.paths.tmpAssets,
+          path: sails.config.deploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
           filename: isWebpackDev ? 'js/[name].js' : 'js/[name].[chunkHash:8].js',
           chunkFilename: isWebpackDev ? 'js/[name].chunk.js' : 'js/[name].chunk.[chunkHash:8].js',
           publicPath: isDeploy ?  sails.macros.KCdnUrl + '/assets/' : '/assets/',
