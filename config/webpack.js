@@ -31,7 +31,7 @@ module.exports.webpack = function (sails) {
   const webpackEntryPages = {};
   const commonChunks = [];
   sails.config.pages.pages.forEach(function (obj) {
-    webpackEntryPages[obj.name] = sails.paths.assetJs + obj.mainJs;
+    webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
     webpackPlugins.push(
       new HtmlWebpackPlugin({
         template: sails.paths.pages + obj.mainHtml,
@@ -40,7 +40,7 @@ module.exports.webpack = function (sails) {
         title: obj.title || 'Sails App',
         keywords: (obj.keywords || []).join(','),
         description: obj.description || '',
-        chunks: _.union(['_lib'], obj.otherJs || [], [obj.name]),
+        chunks: _.union(['_lib'], obj.otherJs || [], ['chunk-' + obj.name]),
         alwaysWriteToDisk: true
       })
     );
