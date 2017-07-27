@@ -12,6 +12,7 @@ module.exports['webpack-plugins'] = function (sails) {
       //分离CSS样式文件
       res: new ExtractTextPlugin({
         filename: 'styles/[name].[contenthash:8].css',
+        allChunks: true
       }),
       env: ['dev', 'pro', 'deploy'],
       enabled: true
