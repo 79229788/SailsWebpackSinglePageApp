@@ -4,8 +4,12 @@
 </style>
 
 <template>
-  <div class="modules <%=filename%>">
-    <module-<%=modulename%>></module-<%=modulename%>>
+  <div id="wrapper">
+    <div class="modules <%=filename%>">
+      <div class="wrapper">
+        <module-<%=modulename%>></module-<%=modulename%>>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,20 +19,17 @@ import Vue from 'vue';
 //**********************************************************************页面模块共享状态
 //**************************************************************
 //**************************************************************
-app.page.shares.<%=fileCamelName%>Event = new Vue();
-app.page.shares.<%=fileCamelName%>Store = {
+const sharedEvent = app.page.shares.<%=fileCamelName%>Event = new Vue();
+const sharedStore = app.page.shares.<%=fileCamelName%>Store = {
   state: {
-    <%=moduleCamelName%>: null,
-  },
-  set<%=moduleFullCamelName%>: function (vm) {
-    this.state.<%=moduleCamelName%> = vm;
+
   }
 };
 
 export default {
   data: function () {
     return {
-      sharedState: app.page.shares.<%=fileCamelName%>Store.state
+      sharedState: sharedStore.state,
     }
   },
   //**********************************************************************注册页面模块

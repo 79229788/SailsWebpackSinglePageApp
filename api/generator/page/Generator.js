@@ -54,6 +54,7 @@ module.exports = {
       return section;
     });
     scope.moduleCamelName = moduleSections.join('');
+    //模块名驼峰命名(首字母也大写)
     scope.moduleFullCamelName = scope.moduleCamelName.substring(0, 1).toUpperCase() + scope.moduleCamelName.substring(1);
 
     cb();
@@ -66,8 +67,8 @@ module.exports = {
    */
   targets: {
     //'./test': { template: 'swig.template.js' },
-    './assets/js/views/:filename/index.vue': { template: 'index.template.js' },
-    './assets/js/views/:filename/modules/:modulename.vue': { template: 'module.template.js' },
+    './assets/javascript/views/:filename/index.vue': { template: 'index.template.js' },
+    './assets/javascript/views/:filename/modules/:modulename.vue': { template: 'module.template.js' },
   },
 
 

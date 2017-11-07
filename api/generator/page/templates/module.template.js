@@ -24,19 +24,18 @@
       }
     },
     created: function () {
-      sharedStore.set<%=moduleFullCamelName%>(this);
       this.initData();
     },
     mounted: function () {},
     methods: {
       //*********************************内置方法
       //***************************
-      //*********初始数据
+      //**********初始数据
       initData: function () {
 
       },
-      //*********重置数据
-      reset: function () {
+      //**********重置数据
+      resetData: function () {
 
         this.initData();
       },

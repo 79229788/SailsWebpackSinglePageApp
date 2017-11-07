@@ -5,8 +5,8 @@ module.exports = function (gulp, sails) {
       //排除以下webpack打包使用的目录
       `!${sails.paths.assets}/{fonts,fonts/**}`,
       `!${sails.paths.assets}/{images,images/**}`,
-      `!${sails.paths.assets}/{js,js/**}`,
-      `!${sails.paths.assets}/{libs,libs/**}`,
+      `!${sails.paths.assets}/{javascript,javascript/**}`,
+      `!${sails.paths.assets}/{library,library/**}`,
       `!${sails.paths.assets}/{styles,styles/**}`,
       `!${sails.paths.assets}/{templates,templates/**}`
     ]).pipe(gulp.dest(sails.config.deploy ? sails.paths.wwwAssets : sails.paths.tmpAssets));

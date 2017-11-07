@@ -32,11 +32,16 @@ module.exports.webpack = function (sails) {
   const commonChunks = [];
   sails.config.pages.pages.forEach(function (obj) {
     webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
-    const chunks = _.union(['_lib'], obj.otherJs || [], ['chunk-' + obj.name]);
+    const chunks = _.union(obj.loadLibs ? ['_lib'] : [], obj.otherJs || [], ['chunk-' + obj.name]);
+    let templateOutput = sails.paths._pages + obj.mainHtml;
+    if(obj.isStatic) {
+      const dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
+      templateOutput = dirPath + obj.mainHtml.replace('.swig', '.html');
+    }
     webpackPlugins.push(
       new HtmlWebpackPlugin({
         template: sails.paths.pages + obj.mainHtml,
-        filename: obj.isStatic ? (sails.paths.tmpPages + obj.mainHtml.replace('.swig', '.html')) : (sails.paths._pages + obj.mainHtml),
+        filename: templateOutput,
         inject: false,
         title: obj.title || 'Sails App',
         keywords: (obj.keywords || []).join(','),
@@ -110,10 +115,10 @@ module.exports.webpack = function (sails) {
         },
         entry: webpackEntry,
         output: {
-          path: sails.config.deploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
-          filename: isWebpackDev ? 'js/[name].js' : 'js/[name].[chunkHash:8].js',
-          chunkFilename: isWebpackDev ? 'js/[name].chunk.js' : 'js/[name].chunk.[chunkHash:8].js',
-          publicPath: isDeploy ?  sails.macros.KCdnUrl + '/assets/' : '/assets/',
+          path: isDeploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
+          filename: isWebpackDev ? 'javascript/[name].js' : 'javascript/[name].[chunkHash:8].js',
+          chunkFilename: isWebpackDev ? 'javascript/[name].chunk.js' : 'javascript/[name].chunk.[chunkHash:8].js',
+          publicPath: isDeploy ?  sails.macros.KCdnUrl + '/assets/' : '/',
         },
         module: {
           rules: webpackLoaders

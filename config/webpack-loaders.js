@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -10,14 +11,22 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'vue-loader',
           options: {
             loaders: {
-              js: 'babel-loader?presets[]=es2015',
+              js: {
+                loader: 'babel-loader',
+                options: {
+                  sourceMap: false,
+                  presets: ['es2015'],
+                  plugins: ['syntax-dynamic-import']
+                },
+              },
               css: ['vue-style-loader', 'css-loader'],
-              scss: ['vue-style-loader', 'css-loader', 'sass-loader']
+              scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
+              less: ['vue-style-loader', 'css-loader', 'less-loader']
             }
           }
         }
       },
-      env: ['webpack-dev'],
+      env: ['webpack-dev', 'dev'],
       enabled: true
     },
     {
@@ -27,7 +36,14 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'vue-loader',
           options: {
             loaders: {
-              js: 'babel-loader?presets[]=es2015&plugins[]=syntax-dynamic-import',
+              js: {
+                loader: 'babel-loader',
+                options: {
+                  sourceMap: false,
+                  presets: ['es2015'],
+                  plugins: ['syntax-dynamic-import']
+                },
+              },
               css: ExtractTextPlugin.extract({
                 use: 'css-loader',
                 fallback: 'vue-style-loader'
@@ -35,18 +51,22 @@ module.exports['webpack-loaders'] = function (sails) {
               scss: ExtractTextPlugin.extract({
                 use: ['css-loader', 'sass-loader'],
                 fallback: 'vue-style-loader'
-              })
+              }),
+              less: ExtractTextPlugin.extract({
+                use: ['css-loader', 'less-loader'],
+                fallback: 'vue-style-loader'
+              }),
             }
           }
         }
       },
-      env: ['dev', 'pro', 'deploy'],
+      env: ['pro', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.js$/,
-        include: /(assets\/js|libs\/comber|iview)/,
+        include: /(assets\/javascript)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -64,18 +84,7 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
-      env: ['webpack-dev'],
-      enabled: true
-    },
-    {
-      res: {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      },
-      env: ['dev'],
+      env: ['webpack-dev', 'dev'],
       enabled: true
     },
     {
@@ -94,18 +103,7 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
-      env: ['webpack-dev'],
-      enabled: true
-    },
-    {
-      res: {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'sass-loader'],
-          fallback: 'style-loader',
-        })
-      },
-      env: ['dev'],
+      env: ['webpack-dev', 'dev'],
       enabled: true
     },
     {
@@ -113,6 +111,25 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           use: ['css-loader?minimize', 'sass-loader'],
+          fallback: 'style-loader',
+        })
+      },
+      env: ['pro', 'deploy'],
+      enabled: true
+    },
+    {
+      res: {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      env: ['webpack-dev', 'dev'],
+      enabled: true
+    },
+    {
+      res: {
+        test: /\.less$/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader?minimize', 'less-loader'],
           fallback: 'style-loader',
         })
       },
