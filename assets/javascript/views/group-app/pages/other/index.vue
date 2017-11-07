@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../styles/source.scss";
+  @import "../../../../../styles/source.scss";
 
 </style>
 
@@ -15,8 +15,8 @@
   //**********************************************************************页面模块共享状态
   //**************************************************************
   //**************************************************************
-  app.page.shares.homeEvent = new Vue();
-  app.page.shares.homeStore = {
+  const sharedEvent = app.page.shares.otherEvent = new Vue();
+  const sharedState = app.page.shares.otherStore = {
     state: {}
   };
 
@@ -25,7 +25,7 @@
     //**************************************************************
     //**************************************************************
     components: {
-      'module-module1': require('views/page-home/modules/module1')
+      'module-module1': require('./modules/module1')
     }
   }
 

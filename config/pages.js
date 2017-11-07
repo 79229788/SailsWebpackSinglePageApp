@@ -17,28 +17,17 @@
 module.exports.pages = {
   libs: ['vue', 'vue-router'],
   scripts: {
-    'pub': ['./assets/javascript/app.js'],
+    'pub': ['./assets/javascript/views/page.js'],
   },
   pages: [
     {
-      name: 'app',
-      mainHtml: '/app.swig',
-      mainJs: '/app.js',
+      name: 'group-app',
+      mainHtml: '/group-app.swig',
+      mainJs: '/views/group-app/main.js',
       otherJs: ['pub'],
       loadLibs: true,
       isStatic: false,
       title: '单页',
-      keywords: [],
-      description: '',
-    },
-    {
-      name: 'page-login',
-      mainHtml: '/page-login.swig',
-      mainJs: '/views/page-login/main.js',
-      otherJs: ['pub'],
-      loadLibs: true,
-      isStatic: false,
-      title: '登陆',
       keywords: [],
       description: '',
     }

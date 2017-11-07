@@ -1,7 +1,7 @@
 @import "source.scss";
 
 html{margin: 0;}
-body{padding:0;background:transparent;position:relative;z-index: 2;-webkit-user-select:auto;margin:0;overflow:hidden;overflow-y: auto; min-height:20px;@include box-sizing(border-box);color: #555;font-size: 1em;}
+body{padding:0;background:transparent;position:relative;z-index: 2;-webkit-user-select:auto;margin:0;@include box-sizing(border-box);color: #555;font-size: 1em;}
 body:after{content:"";display:block;clear:both;}
 body, body:focus{outline: transparent solid 0;}
 body{position: relative; -webkit-user-select: auto; background: 0 0;}

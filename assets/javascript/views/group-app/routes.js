@@ -4,8 +4,8 @@ import _map from 'lodash/map';
 Vue.use(VueRouter);
 
 const routes = {
-   '/'              : {view: 'page-home'},
-   '/other'         : {view: 'page-other', meta: {keepAlive: true}},
+   '/app/home'          : {view: 'home'},
+   '/app/other'         : {view: 'other', meta: {keepAlive: true}},
 };
 
 export default new VueRouter({
@@ -18,7 +18,7 @@ export default new VueRouter({
       component: function (resolve) {
         import(
           /* webpackChunkName: "[request]" */
-          `./views/${value.view}/index`
+          `./pages/${value.view}/index`
         ).then(function (data) {
           resolve(data);
         });

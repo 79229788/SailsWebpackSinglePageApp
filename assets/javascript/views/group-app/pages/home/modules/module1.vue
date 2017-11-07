@@ -1,5 +1,5 @@
 <style lang="scss" scoped>
-  @import "../../../../styles/source.scss";
+  @import "../../../../../../styles/source.scss";
   #module1{
     em{color: #de0000;font-style: normal;}
   }

@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../styles/source.scss";
+  @import "../../../../styles/source.scss";
   #footer{
     width: 100%;height:150px;background: #f5f5f5;@include m-box-center;
     p{font-size: 24px;}

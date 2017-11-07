@@ -14,15 +14,10 @@
   {# 引入模块css文件 #}
   {% block stylesheets %}{% endblock %}
 </head>
-<body id="app">
-  <div id="page">
-    {% if !hideHeader %}<layout-header></layout-header>{% endif %}
-    <div id="content">
-      {# 引入内容部分 #}
-      {% block content %}{% endblock %}
-    </div>
-    {% if !hideFooter %}<layout-footer></layout-footer>{% endif %}
-  </div>
+<body>
+  {# 引入内容部分 #}
+  {% block content %}{% endblock %}
+
   {# 引入公共脚本 #}
   {% include "scripts.swig" %}
   {# 引入模块脚本 #}

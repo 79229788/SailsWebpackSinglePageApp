@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../styles/source.scss";
+  @import "../../../../styles/source.scss";
   #header{
     width: 100%;height:150px;background: #f5f5f5;@include m-box-center;
     p{font-size: 24px;}
@@ -12,8 +12,8 @@
       <p>a public header</p>
       <p>timer: {{ count }}</p>
       <p>
-        <router-link to="/">home</router-link>
-        <router-link to="/other">other</router-link>
+        <router-link to="/app/home">home</router-link>
+        <router-link to="/app/other">other</router-link>
       </p>
     </div>
   </div>

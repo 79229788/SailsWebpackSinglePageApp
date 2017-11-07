@@ -46,7 +46,7 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
-  '/login'                                                : { view: 'page-login'},
-  '/*'                                                    : { view: 'app', skipAssets: true},
+  '/'                                                         : { view: 'group-app', skipAssets: true},
+  '/app/*'                                                    : { view: 'group-app', skipAssets: true},
 
 };
