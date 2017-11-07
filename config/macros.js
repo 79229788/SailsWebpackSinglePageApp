@@ -34,7 +34,7 @@ module.exports.macros = function (sails) {
   };
   //**********全局宏，仅仅用于后端(支持方法，存放敏感信息)
   sails.privateMacros = {
-    //调试主机地址（一般不要用）
+    //调试主机地址（仅在webpack热更新时使用，端口为3000）
     KDebugHostUrl: 'http://localhost',
   };
   sails.macros = sails.config.macros = _.extend({}, sails.publicMacros, sails.privateMacros);
