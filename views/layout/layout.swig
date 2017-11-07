@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}-{{ sails.macros.KWebsiteName }}</title>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="renderer" content="webkit">
   <meta name="format-detection" content="telephone=no,email=no">
-  {% if device.isMobile %}
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-  {% endif %}
+  {% if device.isMobilePhone %}<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">{% endif %}
+  <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="{% block description %}{% endblock %}">
   <meta name="keywords" content="{% block keywords %}{% endblock %}">
   {# 引入公共css文件 #}

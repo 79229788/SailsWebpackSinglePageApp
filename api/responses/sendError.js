@@ -1,15 +1,19 @@
 const _ = require('lodash');
-module.exports = function sendError(data, code, message) {
+module.exports = function sendError(code, message) {
   let _code = 500;
   let _message = '未知错误';
-  if(_.isObject(data)) {
-    if(data.code) _code = data.code;
-    if(data.message) _message = data.message;
+  if(_.isObject(code)) {
+    if(code.code) _code = code.code;
+    if(code.message) _message = code.message;
   }else {
-    _message = data + '';
+    if(message) {
+      _code = code;
+      _message = message;
+    }else {
+      _message = code;
+    }
   }
-  if(code) _code = code;
-  if(message) _message = message;
-  return this.res.send(500, { code: _code, message: _message });
+  return this.res.send(500, RewriteError(_code, _message));
 };
+
 
