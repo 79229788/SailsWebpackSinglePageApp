@@ -47,10 +47,12 @@ module.exports.views = {
       const mobileDetect = new MobileDetect(userAgent);
       data.device = {
         isMobile: !!mobileDetect.mobile(),
+        isMobilePhone: mobileDetect.mobile() && !mobileDetect.tablet(),
+        isMobileTablet: !!mobileDetect.tablet(),
         isIos: mobileDetect.is('iOS'),
         isAndroid: mobileDetect.is('AndroidOS'),
         isIPhone: mobileDetect.is('iPhone'),
-        isIPad:mobileDetect.is('iPad'),
+        isIPad: mobileDetect.is('iPad'),
         androidVersion: mobileDetect.version('Android') || -1,
         isWeChat: userAgent ? userAgent.indexOf('MicroMessenger') > 0 : false,
         isDingTalk: userAgent ? userAgent.indexOf('DingTalk') > 0 : false
