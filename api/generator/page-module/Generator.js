@@ -9,12 +9,12 @@ _.defaults = require('merge-defaults');
 
 
 /**
- * sails-generate-page
+ * sails-generate-page-module
  *
  * Usage:
- * `sails generate page`
+ * `sails generate page module`
  *
- * @description Generates a page
+ * @description Generates a page module
  * @help See http://links.sailsjs.org/docs/generators
  */
 
@@ -31,7 +31,7 @@ module.exports = {
    * @param  {Function} cb    [callback]
    */
   before: function (scope, cb) {
-    if (!scope.args[0]) return cb( new Error('Please provide a name for this page.') );
+    if (!scope.args[0]) return cb( new Error('Please provide a name for this page module.') );
     if (!scope.rootPath) return cb( INVALID_SCOPE_VARIABLE('rootPath') );
     _.defaults(scope, {createdAt: new Date()});
     //设置模板变量
@@ -69,7 +69,6 @@ module.exports = {
    * @type {Object}
    */
   targets: {
-    './assets/javascript/views/:groupName/pages/:pageName/index.vue': { template: 'index.template.js' },
     './assets/javascript/views/:groupName/pages/:pageName/modules/:moduleName.vue': { template: 'module.template.js' },
   },
 

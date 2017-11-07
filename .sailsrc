@@ -1,7 +1,8 @@
 {
   "generators": {
     "modules": {
-      "page": "api/generator/page"
+      "page": "api/generator/page",
+      "page-module": "api/generator/page-module"
     }
   },
   "hooks": {

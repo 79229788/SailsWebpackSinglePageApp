@@ -1,13 +1,13 @@
 <style lang="scss">
-  @import "../../../styles/source.scss";
+  @import "../../../../../styles/source.scss";
 
 </style>
 
 <template>
   <div id="wrapper">
-    <div class="modules <%=filename%>">
+    <div class="modules <%=pageFullName%>">
       <div class="wrapper">
-        <module-<%=modulename%>></module-<%=modulename%>>
+        <module-<%=moduleName%>></module-<%=moduleName%>>
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@ import Vue from 'vue';
 //**********************************************************************页面模块共享状态
 //**************************************************************
 //**************************************************************
-const sharedEvent = app.page.shares.<%=fileCamelName%>Event = new Vue();
-const sharedStore = app.page.shares.<%=fileCamelName%>Store = {
+const sharedEvent = app.page.shares.<%=pageCamelName%>Event = new Vue();
+const sharedStore = app.page.shares.<%=pageCamelName%>Store = {
   state: {
 
   }
@@ -29,6 +29,7 @@ const sharedStore = app.page.shares.<%=fileCamelName%>Store = {
 export default {
   data: function () {
     return {
+      sharedEvent: sharedEvent,
       sharedState: sharedStore.state,
     }
   },
@@ -36,7 +37,7 @@ export default {
   //**************************************************************
   //**************************************************************
   components: {
-    'module-<%=modulename%>': require('views/<%=filename%>/modules/<%=modulename%>')
+    'module-<%=moduleName%>': require('./modules/<%=moduleName%>')
   }
 }
 
