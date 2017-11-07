@@ -25,8 +25,6 @@ module.exports.macros = function (sails) {
   };
   //**********全局宏，前端、后端共享(不支持方法) -- 在前端使用app.macros调用
   sails.publicMacros = {
-    //站点名称
-    KWebsiteName: "Sails App",
     //网站域名
     KWebUrl: sails.debug ? 'http://dev.net' : 'https://.net',
     //cdn域名
