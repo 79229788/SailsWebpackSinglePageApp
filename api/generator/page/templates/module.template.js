@@ -6,7 +6,7 @@
 </style>
 
 <template>
-  <section class="<%=moduleFullName%>">
+  <section class="<%=moduleFullName%> <%=moduleName%>">
 
   </section>
 </template>

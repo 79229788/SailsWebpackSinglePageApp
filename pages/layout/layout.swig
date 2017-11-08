@@ -19,7 +19,9 @@
   {% block content %}{% endblock %}
 
   {# 引入公共脚本 #}
-  {% include "scripts.swig" %}
+  {% include "./script-main.swig" %}
+  {% include "./script-url.swig" %}
+  {% include "./script-cookie.swig" %}
   {# 引入模块脚本 #}
   {% block scripts %}{% endblock %}
 </body>
