@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../../../styles/source.scss";
+  @import "assets/styles/source.scss";
 
 </style>
 
