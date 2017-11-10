@@ -5,9 +5,9 @@
 {% block stylesheets %}
 {% endblock %}
 {% block scripts %}
-<script src="/javascript/_lib.cd80c9ac.js" type="text/javascript"></script>
-<script src="/javascript/pub.7569479c.js" type="text/javascript"></script>
-<script src="/javascript/chunk-group-app.54bca1ea.js" type="text/javascript"></script>
+<script src="/javascript/_lib.7fc78141.js" type="text/javascript"></script>
+<script src="/javascript/pub.60bb6b4a.js" type="text/javascript"></script>
+<script src="/javascript/chunk-group-app.246737a1.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
