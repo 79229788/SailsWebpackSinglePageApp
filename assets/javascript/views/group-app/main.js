@@ -1,5 +1,5 @@
-import 'styles/page.scss';
-import 'views/page.js';
+import 'views/group-public/styles/page.scss';
+import 'views/group-public/page.js';
 //**********核心库
 import Vue from 'vue';
 //**********其它

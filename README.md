@@ -60,7 +60,6 @@ sails generagte ...                                 //sails自带生成器，省
           mainHtml: '/app.swig',       //页面主html文件
           mainJs: 'app.js',            //页面主js文件
           otherJs: ['pub'],            //所需的公共模块
-          loadLibs: true,              //页面加载公共库[热更新模式下，至少必须加载一个公共库]
           isStatic: false,             //该页面是否为静态页面。①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用
           title: '单页',                //页面标题
           keywords: null,              //页面SEO关键词

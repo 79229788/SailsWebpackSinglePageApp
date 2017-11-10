@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../../../styles/source.scss";
+  @import "assets/styles/source.scss";
 
 </style>
 
@@ -14,32 +14,32 @@
 </template>
 
 <script>
-import Vue from 'vue';
+  import Vue from 'vue';
 
-//**********************************************************************页面模块共享状态
-//**************************************************************
-//**************************************************************
-const sharedEvent = app.page.shares.<%=pageCamelName%>Event = new Vue();
-const sharedStore = app.page.shares.<%=pageCamelName%>Store = {
-  state: {
+  //**********************************************************************页面模块共享状态
+  //**************************************************************
+  //**************************************************************
+  const sharedEvent = app.page.shares.<%=pageCamelName%>Event = new Vue();
+  const sharedStore = app.page.shares.<%=pageCamelName%>Store = {
+    state: {
 
-  }
-};
-
-export default {
-  data: function () {
-    return {
-      sharedEvent: sharedEvent,
-      sharedState: sharedStore.state,
     }
-  },
-  //**********************************************************************注册页面模块
-  //**************************************************************
-  //**************************************************************
-  components: {
-    'module-<%=moduleName%>': require('./modules/<%=moduleName%>')
+  };
+
+  export default {
+    //**********************************************************************注册页面模块
+    //**************************************************************
+    //**************************************************************
+    components: {
+      'module-<%=moduleName%>': require('./modules/<%=moduleName%>')
+    },
+    data: function () {
+      return {
+        sharedEvent: sharedEvent,
+        sharedState: sharedStore.state,
+      }
+    },
   }
-}
 
 </script>
 

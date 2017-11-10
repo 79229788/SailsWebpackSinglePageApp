@@ -6,18 +6,17 @@
  * *****pages 页面配置
  *  name              : 页面名
  *  mainHtml          : 页面主html文件 pages 目录下
- *  mainJs            : 页面主js文件 assets/js 目录下
+ *  mainJs            : 页面主js文件 assets/javascript 目录下
  *  otherJs           : 页面其它js模块文件
- *  loadLibs          : 页面加载公共库[热更新模式下，至少必须加载一个公共库]
  *  isStatic          : 页面是否为静态页面，①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用
  *  title             : 页面标题名
  *  keywords          : 页面SEO关键词
  *  description       : 页面SEO描述
  */
 module.exports.pages = {
-  libs: ['vue', 'vue-router'],
+  libs: ['./assets/javascript/libs/empty'],
   scripts: {
-    'pub': ['./assets/javascript/views/page.js'],
+    'pub': ['vue', 'vue-router'],
   },
   pages: [
     {
@@ -25,7 +24,6 @@ module.exports.pages = {
       mainHtml: '/group-app.swig',
       mainJs: '/views/group-app/main.js',
       otherJs: ['pub'],
-      loadLibs: true,
       isStatic: false,
       title: '单页',
       keywords: [],

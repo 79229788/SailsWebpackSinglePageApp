@@ -32,7 +32,7 @@ module.exports.webpack = function (sails) {
   const commonChunks = [];
   sails.config.pages.pages.forEach(function (obj) {
     webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
-    const chunks = _.union(obj.loadLibs ? ['_lib'] : [], obj.otherJs || [], ['chunk-' + obj.name]);
+    const chunks = _.union(['_lib'], obj.otherJs || [], ['chunk-' + obj.name]);
     let templateOutput = sails.paths._pages + obj.mainHtml;
     if(obj.isStatic) {
       const dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
