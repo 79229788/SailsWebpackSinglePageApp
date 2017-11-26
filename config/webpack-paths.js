@@ -5,6 +5,7 @@ module.exports['webpack-paths'] = function (sails) {
     'vue-router': 'vue-router/dist/vue-router.js',
 
     //custom
+    'library': sails.paths.assets + '/library',
     'libs': sails.paths.assets + '/javascript/libs',
     'js': sails.paths.assets + '/javascript',
     'views': sails.paths.assets + '/javascript/views',

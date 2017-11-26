@@ -31,16 +31,22 @@ module.exports.webpack = function (sails) {
   const webpackEntryPages = {};
   const commonChunks = [];
   sails.config.pages.pages.forEach(function (obj) {
-    webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
+    if(obj.mainJs) webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
     const chunks = _.union(['_lib'], obj.otherJs || [], ['chunk-' + obj.name]);
-    let templateOutput = sails.paths._pages + obj.mainHtml;
+    const mainHtmlPath = (obj.root ? '/' + obj.root : '') + obj.mainHtml;
+    let templateOutput = sails.paths._pages + mainHtmlPath;
     if(obj.isStatic) {
-      const dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
+      let dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
+      if(obj.root) {
+        dirPath = isDeploy
+          ? `${sails.paths.root}/www-${obj.root}`
+          : `${sails.paths.tmpAssets}/${obj.root}`;
+      }
       templateOutput = dirPath + obj.mainHtml.replace('.swig', '.html');
     }
     webpackPlugins.push(
       new HtmlWebpackPlugin({
-        template: sails.paths.pages + obj.mainHtml,
+        template: sails.paths.pages + mainHtmlPath,
         filename: templateOutput,
         inject: false,
         title: obj.title || 'Sails App',
@@ -66,7 +72,7 @@ module.exports.webpack = function (sails) {
     );
     webpackLoaders.push(
       {
-        test: new RegExp(obj.name + '\.swig$'),
+        test: new RegExp(`${(obj.root ? '/' + obj.root : '') + '/' + obj.name}\.swig$`),
         use: [{
           loader: obj.isStatic ? 'swig-loader' : 'html-loader'
         }],
