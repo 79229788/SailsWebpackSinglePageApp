@@ -5,7 +5,7 @@
  *
  * *****pages 页面配置
  *  name              : 页面名
- *  root              : 自定义根 pages目录下的自定义根 当类型为静态页面的时候，部署模式下该根会直接生成独立文件夹[需要单独部署]。在非部署模式下则会在tmp的assets中独立存在
+ *  root              : 自定义根 当类型为静态页面的时候，部署模式下该根会直接生成独立文件夹[需要单独部署]。在非部署模式下则会在tmp的assets中独立存在
  *  mainHtml          : 页面主html文件 pages 目录下
  *  mainJs            : 页面主js文件 assets/javascript 目录下
  *  otherJs           : 页面其它js模块文件

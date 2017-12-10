@@ -33,20 +33,19 @@ module.exports.webpack = function (sails) {
   sails.config.pages.pages.forEach(function (obj) {
     if(obj.mainJs) webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
     const chunks = _.union(['_lib'], obj.otherJs || [], ['chunk-' + obj.name]);
-    const mainHtmlPath = (obj.root ? '/' + obj.root : '') + obj.mainHtml;
-    let templateOutput = sails.paths._pages + mainHtmlPath;
+    let templateOutput = sails.paths._pages + obj.mainHtml;
     if(obj.isStatic) {
       let dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
       if(obj.root) {
         dirPath = isDeploy
-          ? `${sails.paths.root}/www-${obj.root}`
-          : `${sails.paths.tmpAssets}/${obj.root}`;
+          ? sails.paths.root + '/www-' + obj.root
+          : sails.paths.tmpAssets + '/' + obj.root;
       }
       templateOutput = dirPath + obj.mainHtml.replace('.swig', '.html');
     }
     webpackPlugins.push(
       new HtmlWebpackPlugin({
-        template: sails.paths.pages + mainHtmlPath,
+        template: (obj.isStatic ? 'swig-loader!' : 'html-loader!') + sails.paths.pages + obj.mainHtml,
         filename: templateOutput,
         inject: false,
         title: obj.title || 'Sails App',
@@ -69,14 +68,6 @@ module.exports.webpack = function (sails) {
         interpolate: /<&=([\s\S]+?)&>/g,
         escape: /<&-([\s\S]+?)&>/g,
       })
-    );
-    webpackLoaders.push(
-      {
-        test: new RegExp(`${(obj.root ? '/' + obj.root : '') + '/' + obj.name}\.swig$`),
-        use: [{
-          loader: obj.isStatic ? 'swig-loader' : 'html-loader'
-        }],
-      }
     );
     _.each(sails.config.pages.scripts, function (value, key) {
       if(obj.otherJs.indexOf(key) >-1) {
@@ -109,7 +100,7 @@ module.exports.webpack = function (sails) {
 
   if(isWebpackDev) {
     webpackEntry['_lib'].unshift('webpack/hot/dev-server');
-    webpackEntry['_lib'].unshift(`webpack-dev-server/client?${sails.macros.KDebugHostUrl}:3000/`);
+    webpackEntry['_lib'].unshift('webpack-dev-server/client?'+ sails.macros.KDebugHostUrl +':3000/');
   }
 
   return {
@@ -138,13 +129,13 @@ module.exports.webpack = function (sails) {
         hot: true,
         port: 3000,
         contentBase: sails.paths.tmpAssets,
-        publicPath: '/assets/',
+        publicPath: '/',
         noInfo: true,
         disableHostCheck: true,
         inline: true,
         proxy: {
           '*': {
-            target: `${sails.macros.KDebugHostUrl}:1337`
+            target: sails.macros.KDebugHostUrl + ':1337'
           }
         }
       },
