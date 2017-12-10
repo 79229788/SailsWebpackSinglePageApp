@@ -9,6 +9,11 @@ module.exports['webpack-plugins'] = function (sails) {
       enabled: true
     },
     {
+      res: new webpack.NamedModulesPlugin(),
+      env: ['webpack-dev'],
+      enabled: true
+    },
+    {
       //分离CSS样式文件
       res: new ExtractTextPlugin({
         filename: 'styles/[name].[contenthash:8].css',

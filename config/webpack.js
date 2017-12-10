@@ -115,7 +115,7 @@ module.exports.webpack = function (sails) {
           path: isDeploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
           filename: isWebpackDev ? 'javascript/[name].js' : 'javascript/[name].[chunkHash:8].js',
           chunkFilename: isWebpackDev ? 'javascript/[name].chunk.js' : 'javascript/[name].chunk.[chunkHash:8].js',
-          publicPath: isDeploy ?  sails.macros.KCdnUrl + '/assets/' : '/',
+          publicPath: isDeploy ? (sails.macros.KCdnUrl + '/assets/') : '/',
         },
         module: {
           rules: webpackLoaders
