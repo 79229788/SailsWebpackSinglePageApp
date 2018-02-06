@@ -7,7 +7,7 @@ module.exports = function (sails) {
     initialize: function (next) {
       sails.after('lifted', () => {
         let runGulp = gulp;
-        File.getFilePathList(sails.paths.root + '/tasks/action').then(paths => {
+        FileUtils.getFilePathList(sails.paths.root + '/tasks/action').then(paths => {
           paths.forEach(function (path) {
             runGulp = require(path)(runGulp, sails);
           });
