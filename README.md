@@ -80,10 +80,10 @@ sails generagte ...                                 //sails自带生成器，省
 1. 如果需要使用sails内置的WebSockets，请务必更新以下组件
    ```javascript
    //客户端
-   npm install socket.io-client --save
+   npm install socket.io-client@2.0.4 --save
    npm install sails.io.js --save
    const io = require('sails.io.js')(require('socket.io-client'));
-   
+
    //服务端
    cd /node_modules/sails-hook-sockets/
    npm install sails.io@2.0.4 --save
