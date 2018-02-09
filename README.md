@@ -76,3 +76,18 @@ sails generagte ...                                 //sails自带生成器，省
 
 5. config/webpack-plugins.js ------> webpack 组件配置
 
+### 7. 其它说明
+1. 如果需要使用sails内置的WebSockets，请务必更新以下组件
+   ```javascript
+   //客户端
+   npm install socket.io-client --save
+   npm install sails.io.js --save
+   const io = require('sails.io.js')(require('socket.io-client'));
+   
+   //服务端
+   cd /node_modules/sails-hook-sockets/
+   npm install sails.io@2.0.4 --save
+   ```
+
+
+
