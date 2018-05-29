@@ -15,8 +15,8 @@
   //**********************************************************************页面模块共享状态
   //**************************************************************
   //**************************************************************
-  const sharedEvent = app.page.shares.otherEvent = new Vue();
-  const sharedState = app.page.shares.otherStore = {
+  const sharedEvent = app.page.shares.groupAppOtherEvent = new Vue();
+  const sharedState = app.page.shares.groupAppOtherStore = {
     state: {}
   };
 

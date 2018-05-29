@@ -15,8 +15,8 @@
 <script>
   import Vue from 'vue';
 
-  const sharedEvent = app.page.shares.otherEvent;
-  const sharedState = app.page.shares.otherStore.state;
+  const sharedEvent = app.page.shares.groupAppOtherEvent;
+  const sharedState = app.page.shares.groupAppOtherStore.state;
   export default {
     data: function () {
       return {
