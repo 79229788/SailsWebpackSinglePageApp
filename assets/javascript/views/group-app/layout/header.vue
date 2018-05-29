@@ -1,5 +1,5 @@
 <style lang="scss">
-  @import "../../../../styles/source.scss";
+  @import "assets/styles/source.scss";
   #header{
     width: 100%;height:150px;background: #f5f5f5;@include m-box-center;
     p{font-size: 24px;}

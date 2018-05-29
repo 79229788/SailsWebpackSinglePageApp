@@ -24,20 +24,6 @@ module.exports.routes = {
 
   /***************************************************************************
    *                                                                          *
-   * Custom routes here...                                                    *
-   *                                                                          *
-   * If a request to a URL doesn't match any of the custom routes above, it   *
-   * is matched against Sails route blueprints. See `config/blueprints.js`    *
-   * for configuration options and examples.                                  *
-   *                                                                          *
-   ***************************************************************************/
-
-
-
-
-
-  /***************************************************************************
-   *                                                                          *
    * Make the view located at `views/homepage.swig` (or `views/homepage.jade`, *
    * etc. depending on your default view engine) your home page.              *
    *                                                                          *
@@ -48,5 +34,19 @@ module.exports.routes = {
 
   '/'                                                         : { view: 'group-app', skipAssets: true},
   '/app/*'                                                    : { view: 'group-app', skipAssets: true},
+
+
+  /***************************************************************************
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
+
+
+
 
 };
