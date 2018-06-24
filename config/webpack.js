@@ -41,7 +41,7 @@ module.exports.webpack = function (sails) {
           ? sails.paths.root + '/www-' + obj.root
           : sails.paths.tmpAssets + '/' + obj.root;
       }
-      templateOutput = dirPath + obj.mainHtml.replace('.swig', '.html');
+      templateOutput = dirPath + '/' + obj.name + '.html';
     }
     webpackPlugins.push(
       new HtmlWebpackPlugin({
