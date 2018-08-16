@@ -31,13 +31,16 @@
     //**************************************************************
     //**************************************************************
     components: {
-      'module-<%=moduleName%>': require('./modules/<%=moduleName%>')
+      'module-<%=moduleName%>': require('./modules/<%=moduleName%>'),
     },
     data: function () {
       return {
         sharedEvent: sharedEvent,
         sharedState: sharedStore.state,
       }
+    },
+    destroyed: function () {
+      sharedEvent.$off();
     },
   }
 

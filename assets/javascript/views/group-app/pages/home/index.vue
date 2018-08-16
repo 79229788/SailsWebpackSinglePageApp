@@ -16,7 +16,7 @@
   //**************************************************************
   //**************************************************************
   const sharedEvent = app.page.shares.groupAppHomeEvent = new Vue();
-  const sharedState = app.page.shares.groupAppHomeStore = {
+  const sharedStore = app.page.shares.groupAppHomeStore = {
     state: {}
   };
 
@@ -26,7 +26,16 @@
     //**************************************************************
     components: {
       'module-module1': require('./modules/module1')
-    }
+    },
+    data: function () {
+      return {
+        sharedEvent: sharedEvent,
+        sharedState: sharedStore.state,
+      }
+    },
+    destroyed: function () {
+      sharedEvent.$off();
+    },
   }
 
 </script>
