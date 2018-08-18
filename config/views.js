@@ -53,9 +53,11 @@ module.exports.views = {
         isAndroid: mobileDetect.is('AndroidOS'),
         isIPhone: mobileDetect.is('iPhone'),
         isIPad: mobileDetect.is('iPad'),
-        androidVersion: mobileDetect.version('Android') || -1,
         isWeChat: userAgent ? userAgent.indexOf('MicroMessenger') > 0 : false,
-        isDingTalk: userAgent ? userAgent.indexOf('DingTalk') > 0 : false
+        isWeChatDevTool: userAgent ? userAgent.indexOf('wechatdevtools') > 0 : false,
+        isDingTalk: userAgent ? userAgent.indexOf('DingTalk') > 0 : false,
+        androidVersion: mobileDetect.version('Android') || -1,
+        iosVersion: mobileDetect.version('iOS') || -1,
       };
 
       // 设置lodash过滤器
