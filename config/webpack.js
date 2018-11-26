@@ -38,8 +38,8 @@ module.exports.webpack = function (sails) {
       let dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
       if(obj.root) {
         dirPath = isDeploy
-          ? sails.paths.root + '/www-' + obj.root
-          : sails.paths.tmpAssets + '/' + obj.root;
+          ? sails.paths.root + '/www-' + obj.root + '/pages'
+          : sails.paths.tmpAssets + '/' + obj.root + '/pages';
       }
       templateOutput = dirPath + '/' + obj.name + '.html';
     }
