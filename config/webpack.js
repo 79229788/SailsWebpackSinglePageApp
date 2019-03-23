@@ -116,6 +116,7 @@ module.exports.webpack = function (sails) {
           filename: isHotDev ? 'javascript/[name].[hash:8].js' : 'javascript/[name].[chunkHash:8].js',
           chunkFilename: isHotDev ? 'javascript/[name].chunk.[hash:8].js' : 'javascript/[name].chunk.[chunkHash:8].js',
           publicPath: isDeploy ? (sails.macros.KCdnUrl + '/assets/') : '/',
+          crossOriginLoading: 'anonymous',
         },
         devtool: isDev || isHotDev ? 'none' : 'source-map',
         module: {

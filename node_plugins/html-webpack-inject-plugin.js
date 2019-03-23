@@ -20,7 +20,7 @@ HtmlWebpackInjectPlugin.prototype.apply = function(compiler) {
         cssString += '<link href="'+ url +'" rel="stylesheet">\n';
       });
       _.each(htmlPluginData.assets.js, (url) => {
-        jsString += '<script src="'+ url +'" type="text/javascript"></script>\n'
+        jsString += '<script src="'+ url +'" type="text/javascript" crossorigin="anonymous"></script>\n'
       });
       const compiled = _.template(htmlPluginData.html);
       htmlPluginData.html = compiled({
