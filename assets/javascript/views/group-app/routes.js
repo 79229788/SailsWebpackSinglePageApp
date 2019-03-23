@@ -4,6 +4,7 @@ import _map from 'lodash/map';
 Vue.use(VueRouter);
 
 const routes = {
+   '/'                  : {view: 'home'},
    '/app/home'          : {view: 'home'},
    '/app/other'         : {view: 'other', meta: {keepAlive: true}},
 };

@@ -7,7 +7,7 @@
 
 <template>
   <section id="module1">
-    <p>this is module1 content from <em>other</em> page</p>
+    <p>this is moduleB content from <em>other</em> page</p>
     <p>timer: {{ count }}</p>
   </section>
 </template>

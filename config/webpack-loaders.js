@@ -26,7 +26,7 @@ module.exports['webpack-loaders'] = function (sails) {
           }
         }
       },
-      env: ['webpack-dev', 'dev'],
+      env: ['hot-dev', 'dev'],
       enabled: true
     },
     {
@@ -76,7 +76,7 @@ module.exports['webpack-loaders'] = function (sails) {
           },
         }
       },
-      env: ['webpack-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'pro', 'deploy'],
       enabled: true
     },
     {
@@ -84,7 +84,7 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
-      env: ['webpack-dev', 'dev'],
+      env: ['hot-dev', 'dev'],
       enabled: true
     },
     {
@@ -103,7 +103,7 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
-      env: ['webpack-dev', 'dev'],
+      env: ['hot-dev', 'dev'],
       enabled: true
     },
     {
@@ -122,7 +122,7 @@ module.exports['webpack-loaders'] = function (sails) {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader']
       },
-      env: ['webpack-dev', 'dev'],
+      env: ['hot-dev', 'dev'],
       enabled: true
     },
     {
@@ -143,7 +143,7 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'url-loader?limit=8192&name=images/[name].[hash:8].[ext]'
         }
       },
-      env: ['webpack-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'pro', 'deploy'],
       enabled: true
     },
     {
@@ -153,7 +153,7 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'file-loader?name=fonts/[name].[hash:8].[ext]'
         }
       },
-      env: ['webpack-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'pro', 'deploy'],
       enabled: true
     },
     {
@@ -163,7 +163,7 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'html-loader?interpolate'
         }],
       },
-      env: ['webpack-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'pro', 'deploy'],
       enabled: true
     }
   ]

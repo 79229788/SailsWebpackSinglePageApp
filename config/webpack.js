@@ -10,19 +10,19 @@ module.exports.webpack = function (sails) {
   const loaders = sails.config['webpack-loaders'](sails);
   const paths = sails.config['webpack-paths'](sails);
   const isDev = sails.config.environment === 'development' && !sails.config.hot;
-  const isWebpackDev = sails.config.environment === 'development' && !!sails.config.hot;
+  const isHotDev = sails.config.environment === 'development' && !!sails.config.hot;
   const isPro = sails.config.environment === 'production' && !sails.config.deploy;
   const isDeploy = sails.config.environment === 'production' && !!sails.config.deploy;
   let webpackPlugins = [];
   let webpackLoaders = [];
   plugins.forEach(function (plugin) {
-    if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isWebpackDev && plugin.env.indexOf('webpack-dev') > -1) webpackPlugins.push(plugin.res);
+    if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isHotDev && plugin.env.indexOf('hot-dev') > -1) webpackPlugins.push(plugin.res);
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isDev && plugin.env.indexOf('dev') > -1) webpackPlugins.push(plugin.res);
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isPro && plugin.env.indexOf('pro') > -1) webpackPlugins.push(plugin.res);
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isDeploy && plugin.env.indexOf('deploy') > -1) webpackPlugins.push(plugin.res);
   });
   loaders.forEach(function (loader) {
-    if((_.isUndefined(loader.enabled) || loader.enabled === true) && isWebpackDev && loader.env.indexOf('webpack-dev') > -1) webpackLoaders.push(loader.res);
+    if((_.isUndefined(loader.enabled) || loader.enabled === true) && isHotDev && loader.env.indexOf('hot-dev') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDev && loader.env.indexOf('dev') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isPro && loader.env.indexOf('pro') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDeploy && loader.env.indexOf('deploy') > -1) webpackLoaders.push(loader.res);
@@ -98,7 +98,7 @@ module.exports.webpack = function (sails) {
   //入口文件
   const webpackEntry = _.extend({}, {'_lib': sails.config.pages.libs}, sails.config.pages.scripts || {}, webpackEntryPages);
 
-  if(isWebpackDev) {
+  if(isHotDev) {
     webpackEntry['_lib'].unshift('webpack/hot/dev-server');
     webpackEntry['_lib'].unshift('webpack-dev-server/client?'+ sails.macros.KDebugHostUrl +':3000/');
   }
@@ -113,10 +113,11 @@ module.exports.webpack = function (sails) {
         entry: webpackEntry,
         output: {
           path: isDeploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
-          filename: isWebpackDev ? 'javascript/[name].js' : 'javascript/[name].[chunkHash:8].js',
-          chunkFilename: isWebpackDev ? 'javascript/[name].chunk.js' : 'javascript/[name].chunk.[chunkHash:8].js',
+          filename: isHotDev ? 'javascript/[name].[hash:8].js' : 'javascript/[name].[chunkHash:8].js',
+          chunkFilename: isHotDev ? 'javascript/[name].chunk.[hash:8].js' : 'javascript/[name].chunk.[chunkHash:8].js',
           publicPath: isDeploy ? (sails.macros.KCdnUrl + '/assets/') : '/',
         },
+        devtool: isDev || isHotDev ? 'none' : 'source-map',
         module: {
           rules: webpackLoaders
         },

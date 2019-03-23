@@ -5,12 +5,12 @@ module.exports['webpack-plugins'] = function (sails) {
   return [
     {
       res: new webpack.HotModuleReplacementPlugin(),
-      env: ['webpack-dev'],
+      env: ['hot-dev'],
       enabled: true
     },
     {
       res: new webpack.NamedModulesPlugin(),
-      env: ['webpack-dev'],
+      env: ['hot-dev'],
       enabled: true
     },
     {
