@@ -1,6 +1,5 @@
 const webpack = require('webpack');
-const _ = require('lodash');
-const fs = require('fs');
+const WebpackDevServer = require('webpack-dev-server');
 
 module.exports = function (sails) {
   return {
@@ -10,46 +9,49 @@ module.exports = function (sails) {
         if(sails.config.deploy && sails.config.only) return require('../../deploy/index').deploy(sails);
         const sailsWebpack = sails.config.webpack(sails);
         this.webpackConfig = sailsWebpack.config;
-        this.webpackDevelopment = sailsWebpack.development;
-        this.compiler = webpack(_.extend({}, this.webpackConfig.options), (err, stats) => {
-          if(err) throw err;
-          sails.log.info('sails-webpack: compiler loaded.');
-          sails.log.silly('sails-webpack: ', stats.toString());
-          if(sails.config.environment === 'development') {
-            sails.log.info('sails-webpack: watching...');
-            this.compiler.watch(_.extend({}, this.webpackConfig.watchOptions), this.afterBuild);
-          }else {
-            sails.log.info('sails-webpack: running...');
-            this.compiler.run(this.afterBuild);
-          }
-        });
-        if(sails.config.environment === 'development' && sails.config.hot) this.development();
+        this.webpackHotMode = sailsWebpack.hotMode;
+        this.compiler = webpack(
+          Object.assign(this.webpackConfig.options, this.webpackHotMode.webpack),
+          (err, stats) => {
+            if(err) throw err;
+            sails.log.info('sails-webpack: compiler loaded.');
+            sails.log.silly('sails-webpack: ', stats.toString());
+            if(sails.config.environment === 'development') {
+              sails.log.info('sails-webpack: watching...');
+              this.compiler.watch(this.webpackConfig.watchOptions || {}, this.afterBuild);
+            }else {
+              sails.log.info('sails-webpack: running...');
+              this.compiler.run(this.afterBuild);
+            }
+          });
+        if(sails.config.hot
+          && sails.config.environment === 'development') {
+          this.hotModeStart();
+        }
       });
       return next();
     },
-    development: function () {
-      this.webpackDevelopment.config = _.extend({
+    //**********热模式启动
+    hotModeStart: function () {
+      this.webpackHotMode.config = Object.assign({
         hot: true,
         port: 3000,
-      }, this.webpackDevelopment.config || {});
-      if (!_.isEmpty(this.webpackDevelopment.webpack)) {
-        this.devServerCompiler = webpack(this.webpackDevelopment.webpack);
-      }
-      const WebpackDevServer = require('webpack-dev-server');
+      }, this.webpackHotMode.config);
       this.devServer = new WebpackDevServer(
-        this.devServerCompiler || this.compiler,
-        this.webpackDevelopment.config
+        this.compiler,
+        this.webpackHotMode.config
       );
-      this.devServer.listen(this.webpackDevelopment.config.port);
+      this.devServer.listen(this.webpackHotMode.config.port);
     },
+    //**********构建完成
     afterBuild: function (err, rawStats) {
       if(err) return sails.log.error('sails-webpack: FATAL ERROR', err);
       const stats = rawStats.toJson();
       if(sails.debug && !sails.config.deploy) {
         sails.log.info('sails-webpack: Build Info\n' + rawStats.toString({
-            colors: true,
-            chunks: false
-          }));
+          colors: true,
+          chunks: false
+        }));
       }else {
         sails.log.info('sails-webpack: Build Completion!');
       }

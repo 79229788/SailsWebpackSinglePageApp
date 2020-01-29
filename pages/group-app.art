@@ -1,0 +1,19 @@
+{{ extend './layout/layout.art' }}
+{{ block 'title' }}{% options.title %}{{ /block }}
+{{ block 'description' }}{% options.description %}{{ /block }}
+{{ block 'keywords' }}{% options.keywords %}{{ /block }}
+{{ block 'stylesheets' }}{% css %}{{ /block }}
+{{ block 'scripts' }}{% js %}{{ /block }}
+
+{{ block 'content' }}
+<div id="page">
+  <layout-header></layout-header>
+  <div id="content">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+  </div>
+  <layout-footer></layout-footer>
+</div>
+{{ /block }}

@@ -1,7 +1,19 @@
-const clean = require('gulp-clean');
+const del = require('del');
 module.exports = function (gulp, sails) {
-  gulp.task('clear-tmp', function() {
-    return gulp.src([sails.paths.tmpAssets, sails.paths.www], {read: false}).pipe(clean());
-  });
-  return gulp;
+  return {
+    tasks: {
+      clearTmp: function (cb) {
+        if(sails.debug) console.log('gulp执行任务[clearTmp]');
+        del([
+          sails.paths.tmpAssets,
+          sails.paths.www,
+          `${sails.paths.www}-pages`
+        ]).then(() => {
+          cb();
+        }).catch(error => {
+          throw error;
+        });
+      }
+    },
+  }
 };

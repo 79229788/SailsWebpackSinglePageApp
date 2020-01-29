@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports['webpack-plugins'] = function (sails) {
   return [
@@ -9,32 +10,16 @@ module.exports['webpack-plugins'] = function (sails) {
       enabled: true
     },
     {
-      res: new webpack.NamedModulesPlugin(),
-      env: ['hot-dev'],
+      res: new VueLoaderPlugin(),
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     },
     {
       //分离CSS样式文件
-      res: new ExtractTextPlugin({
+      res: new MiniCssExtractPlugin({
         filename: 'styles/[name].[contenthash:8].css',
-        allChunks: true
       }),
-      env: ['dev', 'pro', 'deploy'],
-      enabled: true
-    },
-    {
-      //压缩js模块
-      res: new webpack.optimize.UglifyJsPlugin({
-        beautify: false,
-        comments: false,
-        compress: {
-          warnings: false,
-          drop_console: true,
-          collapse_vars: true,
-          reduce_vars: true,
-        }
-      }),
-      env: ['pro', 'deploy'],
+      env: ['prod', 'deploy'],
       enabled: true
     },
   ]

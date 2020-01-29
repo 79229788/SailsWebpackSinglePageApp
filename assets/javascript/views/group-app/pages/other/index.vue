@@ -25,7 +25,7 @@
     //**************************************************************
     //**************************************************************
     components: {
-      'module-module1': require('./modules/module1'),
+      'module-module1': require('./modules/module1').default,
     },
     data: function () {
       return {

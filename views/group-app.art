@@ -1,0 +1,24 @@
+{{ extend './layout/layout.art' }}
+{{ block 'title' }}单页{{ /block }}
+{{ block 'description' }}{{ /block }}
+{{ block 'keywords' }}{{ /block }}
+{{ block 'stylesheets' }}
+<link href="/styles/chunk-group-app~01e7b97c.d4879a24.css" rel="stylesheet">
+{{ /block }}
+{{ block 'scripts' }}
+<script src="/javascript/libs~d0ae3f07.chunk.1eb693de.js" type="text/javascript" crossorigin="anonymous"></script>
+<script src="/javascript/chunk-group-app~01e7b97c.8a93d3a3.js" type="text/javascript" crossorigin="anonymous"></script>
+{{ /block }}
+
+{{ block 'content' }}
+<div id="page">
+  <layout-header></layout-header>
+  <div id="content">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+  </div>
+  <layout-footer></layout-footer>
+</div>
+{{ /block }}

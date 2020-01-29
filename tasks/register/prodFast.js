@@ -1,5 +1,6 @@
 module.exports = function (gulp) {
-  gulp.start([
-    'copy-assets'
+  gulp.startTasks([
+    'clearTmp',
+    'copyAssets',
   ]);
 };

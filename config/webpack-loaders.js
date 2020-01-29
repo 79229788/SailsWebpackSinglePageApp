@@ -1,88 +1,31 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports['webpack-loaders'] = function (sails) {
   return [
     {
       res: {
         test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              js: {
-                loader: 'babel-loader',
-                options: {
-                  sourceMap: false,
-                  presets: ['es2015'],
-                  plugins: ['syntax-dynamic-import']
-                },
-              },
-              css: ['vue-style-loader', 'css-loader'],
-              scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
-              less: ['vue-style-loader', 'css-loader', 'less-loader']
-            }
-          }
-        }
+        loader: 'vue-loader',
       },
-      env: ['hot-dev', 'dev'],
-      enabled: true
-    },
-    {
-      res: {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              js: {
-                loader: 'babel-loader',
-                options: {
-                  sourceMap: false,
-                  presets: ['es2015'],
-                  plugins: ['syntax-dynamic-import']
-                },
-              },
-              css: ExtractTextPlugin.extract({
-                use: 'css-loader',
-                fallback: 'vue-style-loader'
-              }),
-              scss: ExtractTextPlugin.extract({
-                use: ['css-loader', 'sass-loader'],
-                fallback: 'vue-style-loader'
-              }),
-              less: ExtractTextPlugin.extract({
-                use: ['css-loader', 'less-loader'],
-                fallback: 'vue-style-loader'
-              }),
-            }
-          }
-        }
-      },
-      env: ['pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.js$/,
-        include: /(assets\/javascript)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            sourceMap: false,
-            presets: ['es2015'],
-            plugins: ['syntax-dynamic-import']
-          },
-        }
+        loader: 'babel-loader',
+        exclude: file => (
+          /node_modules/.test(file)
+          && !/\.vue\.js/.test(file)
+        ),
       },
-      env: ['hot-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['vue-style-loader', 'css-loader']
       },
       env: ['hot-dev', 'dev'],
       enabled: true
@@ -90,18 +33,15 @@ module.exports['webpack-loaders'] = function (sails) {
     {
       res: {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader?minimize',
-          fallback: 'style-loader'
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
-      env: ['pro', 'deploy'],
+      env: ['prod', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
       },
       env: ['hot-dev', 'dev'],
       enabled: true
@@ -109,18 +49,15 @@ module.exports['webpack-loaders'] = function (sails) {
     {
       res: {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader?minimize', 'sass-loader'],
-          fallback: 'style-loader',
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
-      env: ['pro', 'deploy'],
+      env: ['prod', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['vue-style-loader', 'css-loader', 'less-loader']
       },
       env: ['hot-dev', 'dev'],
       enabled: true
@@ -128,22 +65,19 @@ module.exports['webpack-loaders'] = function (sails) {
     {
       res: {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader?minimize', 'less-loader'],
-          fallback: 'style-loader',
-        })
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
       },
-      env: ['pro', 'deploy'],
+      env: ['prod', 'deploy'],
       enabled: true
     },
     {
       res: {
         test: /\.(gif|jpg|png)$/,
         use: {
-          loader: 'url-loader?limit=8192&name=images/[name].[hash:8].[ext]'
+          loader: 'url-loader?limit=20480&name=images/[name].[hash:8].[ext]'
         }
       },
-      env: ['hot-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     },
     {
@@ -153,7 +87,7 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'file-loader?name=fonts/[name].[hash:8].[ext]'
         }
       },
-      env: ['hot-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     },
     {
@@ -163,7 +97,15 @@ module.exports['webpack-loaders'] = function (sails) {
           loader: 'html-loader?interpolate'
         }],
       },
-      env: ['hot-dev', 'dev', 'pro', 'deploy'],
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
+      enabled: true
+    },
+    {
+      res: {
+        test: /\.art$/,
+        loader: 'art-template-loader',
+      },
+      env: ['hot-dev', 'dev', 'prod', 'deploy'],
       enabled: true
     }
   ]

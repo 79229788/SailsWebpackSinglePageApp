@@ -17,5 +17,6 @@ module.exports['webpack-paths'] = function (sails) {
     'images': sails.paths.assets + '/images',
     'fonts': sails.paths.assets + '/fonts',
     'templates': sails.paths.assets + '/templates',
+    'statics': sails.paths.assets + '/statics',
   };
 };

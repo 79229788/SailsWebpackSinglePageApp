@@ -10,8 +10,7 @@
  * For more information on views and layouts, check out:
  * http://sailsjs.org/#!/documentation/concepts/Views
  */
-const swig = require('swig');
-const swig_extras = require('swig-extras');
+const template = require('art-template');
 const MobileDetect = require('mobile-detect');
 const _ = require('lodash');
 
@@ -36,12 +35,18 @@ module.exports.views = {
 
   engine: {
     /* Template File Extension */
-    ext: 'swig',
+    ext: 'art',
 
     /* Function to handle render request */
     fn: function (path, data, cb) {
-      // 每次更改swig不用重启sails
-      swig.setDefaults({cache: false});
+      // 设置模板选项
+      template.defaults.escape = false;
+      template.defaults.debug = false;
+      template.defaults.compileDebug = false;
+      template.defaults.cache = !sails.debug;
+      template.defaults.minimize = !sails.debug;
+      // 设置模板变量
+      template.defaults.imports.stringify = JSON.stringify;
       // 绑定设备判断
       const userAgent = data.req.headers['user-agent'];
       const mobileDetect = new MobileDetect(userAgent);
@@ -59,15 +64,7 @@ module.exports.views = {
         androidVersion: mobileDetect.version('Android') || -1,
         iosVersion: mobileDetect.version('iOS') || -1,
       };
-
-      // 设置lodash过滤器
-      swig.setFilter('_', function() {
-        return _;
-      });
-      // 补充extra
-      swig_extras.useFilter(swig, 'split');
-      /* Render Templates */
-      return swig.renderFile(path, data, cb);
+      cb(null, template(path, data));
     }
   },
 

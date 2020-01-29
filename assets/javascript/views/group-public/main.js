@@ -62,20 +62,34 @@ export default {
 
     });
     xhook.after((req, res) => {
+      if([0, -1].indexOf(res.status) >= 0) {
+        let message = '';
+        if(res.status === 0) message = '网络连接失败';
+        if(res.status === -1) message = '网络等待超时';
+        if(req.method.toLowerCase() === 'get') {
+          app.$toastHook = vm.$toast(`${message}，请重试一次`);
+        }else {
+          app.$toastHook = vm.$toast(`${message}，请重新提交一次`);
+        }
+      }
       if(res.status === 403 || res.status === 500) {
         const errorInfo = {code: -1, message: '未知错误！'};
         try{
-          const data = new Function("return " + res.data)();
+          const data = new Function('return ' + res.data)() || {};
           if(data.code === 0 || data.code) errorInfo.code = data.code;
           if(data.message) errorInfo.message = data.message;
           if(!data.message) console.error(data);
         }catch(error) {
           errorInfo.message = res.data;
         }
+        vm.$indicator.hide();
         //action
         switch (errorInfo.code) {
           case 10001:
 
+            break;
+          default:
+            app.$toastHook = vm.$toast(`[${errorInfo.code}] ${errorInfo.message}`);
             break;
         }
       }
