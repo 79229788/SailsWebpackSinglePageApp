@@ -25,9 +25,11 @@
       }
     },
     created: function () {
-      setInterval(() => {
-        this.count++;
-      }, 1000);
+      (async () => {
+        setInterval(() => {
+          this.count++;
+        }, 1000);
+      })();
     },
     methods: {
       //*********************************内置方法

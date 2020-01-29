@@ -3,11 +3,10 @@
 {{ block 'description' }}{{ /block }}
 {{ block 'keywords' }}{{ /block }}
 {{ block 'stylesheets' }}
-<link href="/styles/chunk-group-app~01e7b97c.d4879a24.css" rel="stylesheet">
 {{ /block }}
 {{ block 'scripts' }}
-<script src="/javascript/libs~d0ae3f07.chunk.1eb693de.js" type="text/javascript" crossorigin="anonymous"></script>
-<script src="/javascript/chunk-group-app~01e7b97c.8a93d3a3.js" type="text/javascript" crossorigin="anonymous"></script>
+<script src="/javascript/libs~._m.chunk.3089176d.js" type="text/javascript" crossorigin="anonymous"></script>
+<script src="/javascript/chunk-group-app~._a.a8f82c1c.js" type="text/javascript" crossorigin="anonymous"></script>
 {{ /block }}
 
 {{ block 'content' }}
