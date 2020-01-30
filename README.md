@@ -49,19 +49,19 @@ sails generagte ...                                 //sails自带生成器，省
     module.exports.pages = {
       //定义公共的第三方库模块（每一行可为数组并合并打包，并单独加载，此处仅为声明，页面如需使用，请在下面pages中otherJs指定）
       libraries: {
-        'pub': ['./assets/javascript/app.js'],
+        'libs': ['vue', 'vue-router'],
       },
-      //页面配置列表(一般情况下单页只需一个主page，如需单页和多页兼并，则在下面数组进行其它页面配置)
+      //页面配置列表(一组单页视为一个group，可以有无限个子页面，也可以实现多组单页兼并，则在下面数组进行其它页面配置)
       pages: [
         {
-          name: 'app',                 //页面名
-          mainHtml: '/app.art',        //页面主html文件 (pages 目录下)
-          mainJs: 'app.js',            //页面主js文件 (assets/javascript 目录下)
-          otherJs: ['pub'],            //所需的公共模块（一组libs生成一个引用文件，因此建议一个页面只用一组libs，每组内允许添加多个库）
-          isStatic: false,             //该页面是否为静态页面 (①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用)
-          title: '单页',                //页面标题
-          keywords: null,              //页面SEO关键词
-          description: null,           //页面SEO描述
+          name: 'group-app',                   //页面名
+          mainHtml: '/group-app.art',          //页面主html文件 (pages 目录下)
+          mainJs: '/views/group-app/main.js',  //页面主js文件 (assets/javascript 目录下)
+          otherJs: ['libs'],                   //所需的公共模块（一组libs生成一个引用文件，因此建议一个页面只用一组libs，每组内允许添加多个库）
+          isStatic: false,                     //该页面是否为静态页面 (①静态页面则以html格式输出到.tmp/public/pages；②动态页面则输出到views中，可在config/routes中使用)
+          title: '单页',                        //页面标题
+          keywords: [],                        //页面SEO关键词
+          description: '',                     //页面SEO描述
         }
       ]
     }
