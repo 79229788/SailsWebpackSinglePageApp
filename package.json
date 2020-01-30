@@ -14,8 +14,6 @@
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
     "babel-loader": "^8.0.6",
-    "bufferhelper": "^0.2.1",
-    "clean-webpack-plugin": "^3.0.0",
     "compass-mixins": "^0.12.10",
     "connect-redis": "^3.2.0",
     "css-loader": "^3.4.2",
