@@ -13,7 +13,7 @@ An Empty Sails Single Page Application [sails文档请点击查看](https://0.12
 ### 2. 全局安装项目
 
 > * nodejs(推荐官网下载包安装，简单方便)
-> * npm -g install bower ------------- //js包管理（推荐用npm安装到后端，只是npm没有的库再考虑bower安装到前端使用）
+> * npm -g install bower ------------- //js包管理（推荐用npm安装到node，只是npm没有的库再考虑bower安装到前端使用）
 > * npm -g install sails@0.12.4 --------------- //nodejs框架
 
 ### 3. 初始化项目
