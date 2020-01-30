@@ -1,6 +1,6 @@
 # SailsWebpackSPA
 
-An Empty Sails Single Page Application [sails文档请点击查看](http://sailsjs.org)
+An Empty Sails Single Page Application [sails文档请点击查看](https://0.12.sailsjs.com)
 
 ### 1. 清单
 
@@ -39,7 +39,7 @@ sails generagte page <groupName> <pageName> <moduleName>              //生成�
 sails generagte page-module <groupName> <pageName> <moduleName>        //生成页面模块
 sails generagte ...                                 //sails自带生成器，省略..
 ```
-###### [浏览官方文档--自带生成器，点击查看](http://sailsjs.com/documentation/reference/command-line-interface/sails-generate)
+###### [浏览官方文档--自带生成器，点击查看](https://0.12.sailsjs.com/documentation/reference/command-line-interface/sails-generate)
 
 ### 6. 相关配置
 
