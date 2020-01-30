@@ -1,12 +1,12 @@
 <style lang="scss">
-  @import "assets/styles/source.scss";
+  @import "assets/styles/source";
   .<%=moduleFullName%>{
 
   }
 </style>
 
 <template>
-  <section class="<%=moduleFullName%> <%=moduleName%>">
+  <section class="<%=moduleFullName%>">
 
   </section>
 </template>

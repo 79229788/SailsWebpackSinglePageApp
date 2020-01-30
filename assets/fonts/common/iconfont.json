@@ -1,0 +1,198 @@
+{
+  "id": "156251",
+  "name": "小兜营养师管理端",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "44665",
+      "name": "时间",
+      "font_class": "101",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "77417",
+      "name": "更多",
+      "font_class": "msnui-more",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "225092",
+      "name": "iconfont-new",
+      "font_class": "iconfontnew",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "272567",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "290359",
+      "name": "向右",
+      "font_class": "xiangyou2",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "369150",
+      "name": "删除",
+      "font_class": "shanchu1",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "498598",
+      "name": "向右",
+      "font_class": "xiangyou",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    },
+    {
+      "icon_id": "530009",
+      "name": "文章",
+      "font_class": "article",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "577309",
+      "name": "关闭1",
+      "font_class": "guanbi1",
+      "unicode": "e723",
+      "unicode_decimal": 59171
+    },
+    {
+      "icon_id": "577311",
+      "name": "关闭2",
+      "font_class": "guanbi2",
+      "unicode": "e725",
+      "unicode_decimal": 59173
+    },
+    {
+      "icon_id": "577312",
+      "name": "加号",
+      "font_class": "jiahao",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "577313",
+      "name": "加号1",
+      "font_class": "jiahao1",
+      "unicode": "e727",
+      "unicode_decimal": 59175
+    },
+    {
+      "icon_id": "577315",
+      "name": "减号",
+      "font_class": "jianhao",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
+      "icon_id": "577317",
+      "name": "提示",
+      "font_class": "tishi",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "577319",
+      "name": "问号",
+      "font_class": "wenhao",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "577320",
+      "name": "选择",
+      "font_class": "xuanze",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "577324",
+      "name": "圆形选中",
+      "font_class": "yuanxingxuanzhong",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "577365",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "577398",
+      "name": "向下1",
+      "font_class": "xiangxia1",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "587464",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "683273",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "775740",
+      "name": "我的",
+      "font_class": "wode1",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "892310",
+      "name": "新-01",
+      "font_class": "xin01",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "903689",
+      "name": "标签",
+      "font_class": "tag",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "1052489",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "1579624",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "1923891",
+      "name": "问答交流",
+      "font_class": "wendajiaoliu",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    }
+  ]
+}

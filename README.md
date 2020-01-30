@@ -8,6 +8,7 @@ An Empty Sails Single Page Application [sails文档请点击查看](https://0.12
 > * webpack4 ----------------- //构建、模块化、打包工具
 > * vue -------------------------- //前端框架
 > * vue-router ----------------- //前端路由
+> * iconfont -------------------- //阿里妈妈图标库 [查看](https://www.iconfont.cn/)
 
 ### 2. 全局安装项目
 

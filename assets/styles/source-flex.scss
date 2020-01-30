@@ -9,15 +9,23 @@
 //$direction : row横向 column纵向
 @mixin m-flexbox($direction: row) {
   @if $direction == column {
-    @include flexbox(( display: box, box-orient: vertical ));
+    @include flexbox(( display: box, box-orient: vertical, box-direction: normal ));
+    @include flexbox(( display: flexbox, flex-direction: $direction ));
+    @include flexbox(( display: flex, flex-direction: $direction ));
+  } @else if $direction == column-reverse {
+    @include flexbox(( display: box, box-orient: vertical, box-direction: reverse ));
     @include flexbox(( display: flexbox, flex-direction: $direction ));
     @include flexbox(( display: flex, flex-direction: $direction ));
   } @else if $direction == row {
-    @include flexbox(( display: box, box-orient: horizontal ));
+    @include flexbox(( display: box, box-orient: horizontal, box-direction: normal ));
+    @include flexbox(( display: flexbox, flex-direction: $direction ));
+    @include flexbox(( display: flex, flex-direction: $direction ));
+  } @else if $direction == row-reverse {
+    @include flexbox(( display: box, box-orient: horizontal, box-direction: reverse ));
     @include flexbox(( display: flexbox, flex-direction: $direction ));
     @include flexbox(( display: flex, flex-direction: $direction ));
   } @else if $direction == block {
-    @include flexbox(( display: block, box-orient: initial ));
+    @include flexbox(( display: block, box-orient: initial, box-direction: initial ));
     @include flexbox(( display: block, flex-direction: initial ));
     @include flexbox(( display: block, flex-direction: initial ));
   }
@@ -27,6 +35,16 @@
 @mixin m-flex($number) {
   @include flexbox(( box-flex: $number ));
   @include flex($number);
+}
+
+//(多版本)内容提行
+@mixin m-flex-wrap($value: wrap) {
+  @if $value == wrap {
+    @include flexbox(( box-lines: multiple ));
+  } @else if $value == nowrap {
+    @include flexbox(( box-lines: single ));
+  }
+  @include flexbox(( flex-wrap: $value ));
 }
 
 //(多版本)内容横向对齐方式
@@ -68,7 +86,6 @@
 @mixin m-box-center-horizontal {
   @include m-flexbox;
   @include m-justify-content(center);
-  text-align: center;
 }
 
 //(多版本)内容居中(垂直居中)
@@ -77,10 +94,37 @@
   @include align-items(center);
 }
 
+//(多版本)内容底部居中
+@mixin m-box-center-bottom {
+  @include m-flexbox;
+  @include m-justify-content(center);
+  @include align-items(flex-end);
+}
+
+//(多版本)内容底部居中
+@mixin m-box-center-left {
+  @include m-flexbox;
+  @include m-justify-content(flex-start);
+  @include align-items(center);
+}
+
+//(多版本)内容底部居中
+@mixin m-box-center-right {
+  @include m-flexbox;
+  @include m-justify-content(flex-end);
+  @include align-items(center);
+}
+
+//(多版本)内容顶部居中
+@mixin m-box-center-top {
+  @include m-flexbox;
+  @include m-justify-content(center);
+  @include align-items(flex-start);
+}
+
 //(多版本)内容完全居中(横向/垂直均居中，子元素只能有一个，因此有多个子元素时请用div包裹一层即可)
 @mixin m-box-center {
   @include m-flexbox;
   @include m-justify-content(center);
   @include align-items(center);
-  text-align: center;
 }

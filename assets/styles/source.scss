@@ -9,10 +9,15 @@
 }
 
 //**********主题颜色
-$public_main_color: #3870e4;
-$public_main_group_colors: #445ed2 #3297ff;
-$public_main_outline_border_color: #d7dde4;
-$public_main_inline_border_color: #e3e8ee;
+$main-color: #3870e4;
+$main-group-colors: #445ed2 #3297ff;
+$main-outline-border-color: #d7dde4;
+$main-inline-border-color: #e3e8ee;
+
+$main-text1-color: #444;
+$main-text2-color: #656565;
+$main-text3-color: #888;
+$main-text4-color: #aaa;
 
 
 //**********定义media-queries的最小最大宽度
