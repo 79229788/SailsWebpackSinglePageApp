@@ -4,15 +4,19 @@ import _map from 'lodash/map';
 Vue.use(VueRouter);
 
 const routes = {
-   '/'                  : {view: 'home'},
-   '/app/home'          : {view: 'home'},
-   '/app/other'         : {view: 'other', meta: {keepAlive: true}},
+  '/'                  : { title: '首页', view: 'home' },
+  '/app/home'          : { title: '首页', view: 'home'},
+  '/app/other'         : { title: '其它', view: 'other', keepAlive: true},
 };
 
 export default new VueRouter({
   mode: 'history',
   routes: _map(routes, function (value, key) {
     const name = key.replace('/', '');
+    const meta = {};
+    meta.title = value.title;
+    meta.view = value.view;
+    meta.keepAlive = value.keepAlive || false;
     return {
       path: key,
       name: name,
@@ -20,12 +24,12 @@ export default new VueRouter({
         import(
           /* webpackChunkName: "[request]" */
           `./pages/${value.view}/index`
-        ).then(function (data) {
+          ).then(function (data) {
           resolve(data);
         });
       },
-      meta: value.meta,
+      meta: meta,
     };
-  })
+  }),
 });
 
