@@ -10,11 +10,11 @@ module.exports.macros = function (sails) {
   sails.env = sails.config.environment === 'production' ? 'prod' : 'dev';
   sails.paths = {
     root: rootPath,
-    www: rootPath + '/www',
+    www: rootPath + '/www',             //网站部署目录（--deploy 状态生成）
+    wwwPages: rootPath + '/www-pages',  //网站静态页部署目录（--deploy 状态生成）
     wwwAssets: rootPath + '/www/assets',
-    tmpAssets: rootPath + '/.tmp/public',
-    wwwPages: rootPath + '/www/assets/pages',
     tmpPages: rootPath + '/.tmp/public/pages',
+    tmpAssets: rootPath + '/.tmp/public',
     assets: rootPath + '/assets',
     assetJs: rootPath + '/assets/javascript',
     assetJsView: rootPath + '/assets/javascript/views',

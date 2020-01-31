@@ -31,12 +31,9 @@ module.exports.webpack = function (sails) {
     const chunks = _.union(obj.otherJs || [], ['chunk-' + obj.name]);
     let templateOutput = sails.paths._pages + obj.mainHtml;
     if(obj.isStatic) {
-      let dirPath = isDeploy ? sails.paths.wwwPages : sails.paths.tmpPages;
-      if(obj.root) {
-        dirPath = isDeploy
-          ? sails.paths.root + '/www-' + obj.root
-          : sails.paths.tmpAssets + '/' + obj.root;
-      }
+      const dirPath = isDeploy
+        ? sails.paths.wwwPages
+        : sails.paths.tmpPages;
       templateOutput = dirPath + '/' + obj.name + '.html';
     }
     webpackPlugins.push(
