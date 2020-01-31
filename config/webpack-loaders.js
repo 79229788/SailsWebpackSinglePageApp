@@ -82,7 +82,7 @@ module.exports['webpack-loaders'] = function (sails) {
     },
     {
       res: {
-        test: /\.(woff|svg|eot|ttf)$/,
+        test: /\.(woff|woff2|svg|eot|ttf)$/,
         use: {
           loader: 'file-loader?name=fonts/[name].[hash:8].[ext]'
         }
