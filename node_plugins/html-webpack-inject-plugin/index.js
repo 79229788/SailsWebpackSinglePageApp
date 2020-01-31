@@ -36,7 +36,7 @@ Object.assign(HtmlWebpackInjectPlugin.prototype, {
       (compilation, callback) => {
         (async () => {
           const chunks = compilation.chunks.filter(chunk => {
-            return this.options.chunks.indexOf(chunk.name.split('~')[0]) >= 0
+            return chunk.name && this.options.chunks.indexOf(chunk.name.split('~')[0]) >= 0
           });
           const chunksMap = {}, cssFiles = [], jsFiles = [];
           chunks.forEach(chunk => {
