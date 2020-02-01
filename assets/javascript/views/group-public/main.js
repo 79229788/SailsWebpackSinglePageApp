@@ -1,42 +1,11 @@
 //**********核心库
 import Vue from 'vue';
 import FastClick from 'fastclick';
-import xhook from 'xhook';
+import axios from 'axios';
 
-//**********config
-Vue.config.devtools = false;
-
-//**********全局vue
-Vue.mixin({
-  data: function () {
-    return {
-      macros: app.macros,
-      device: app.device,
-    };
-  },
-  created: function () {
-
-  },
-  activated: function () {
-
-  },
-  methods: {
-    /**
-     * 用于template中调试打印
-     * @param value
-     */
-    print: function (value) {
-      console.log(value);
-    },
-    /**
-     * 用于template中调试弹窗
-     * @param value
-     */
-    alert: function (value) {
-      alert(value);
-    },
-  }
-});
+//**********
+import './app';
+import './mixins/global';
 
 export default {
   /**
@@ -44,55 +13,127 @@ export default {
    */
   initConfig: function (vm) {
     FastClick.attach(document.body);
+    Vue.config.devtools = vm.debug;
   },
   /**
-   * 处理BeforeRouteEnter
+   * 初始化数据
+   */
+  initData: function (rootVm) {
+    //记录导航信息
+    const rootPath = location.hash.indexOf('#/') === 0
+      ? location.hash.split('?')[0].slice(1)
+      : location.pathname;
+    rootVm.$store.commit('pushNavigationFlow', rootPath);
+  },
+  /**
+   * 处理全局路由afterEach
+   * @param rootVm
+   * @param to
+   * @param from
+   */
+  handleRouterAfterEach: function (rootVm, to, from) {
+    //rootVm.$loadingBar.finish();
+    //恢复页面滚动位置
+    const prevPosition = rootVm.$store.state.prevPosition[to.path];
+    const recoverLeft = rootVm.$store.state.navigationBackward
+      && prevPosition && prevPosition.x || 0;
+    const recoverTop = rootVm.$store.state.navigationBackward
+      && prevPosition && prevPosition.y || 0;
+    setTimeout(() => {
+      window.scrollTo(recoverLeft, recoverTop);
+    }, 50);
+  },
+  /**
+   * 处理全局路由beforeEach
+   * @param rootVm
    * @param to
    * @param from
    * @param next
    */
-  handleBeforeRouteEnter: function (to, from, next) {
-
+  handleRouterBeforeEach: function (rootVm, to, from, next) {
+    //rootVm.$loadingBar.start();
+    rootVm.$store.commit('pushNavigationFlow', to.path);
+    rootVm.$store.commit('prevRoute', from);
+    rootVm.$store.commit('prevPosition', {
+      from: from.path,
+      x: app.page.getScrollLeft(),
+      y: app.page.getScrollTop(),
+    });
+    next();
   },
   /**
    * 处理Ajax全局请求
    */
   handleAjaxRequest: function (vm) {
-    xhook.before((req) => {
-
+    this.requestRetry = {};
+    //***请求拦截器
+    axios.interceptors.request.use(config => {
+      //vm.$loadingBar.start();
+      if(!this.requestRetry[config.url]) {
+        this.requestRetry[config.url] = 0;
+      }
+      return config;
+    }, (error) => {
+      //vm.$loadingBar.error();
+      return Promise.reject(error);
     });
-    xhook.after((req, res) => {
-      if([0, -1].indexOf(res.status) >= 0) {
-        let message = '';
-        if(res.status === 0) message = '网络连接失败';
-        if(res.status === -1) message = '网络等待超时';
-        if(req.method.toLowerCase() === 'get') {
-          app.$toastHook = vm.$toast(`${message}，请重试一次`);
-        }else {
-          app.$toastHook = vm.$toast(`${message}，请重新提交一次`);
-        }
+    //***响应拦截器
+    axios.interceptors.response.use(response => {
+      //vm.$loadingBar.finish();
+      delete this.requestRetry[response.config.url];
+      return response;
+    }, (error) => {
+      //vm.$loadingBar.error();
+      const config = error.config;
+      const code = error.code;
+      const message = error.message;
+      const response = error.response;
+      //***指定特殊请求忽略拦截操作
+      if(config.url.indexOf('/log/post') >= 0
+        || config.url.indexOf('/auth/is_auth') >= 0) {
+        return Promise.reject(error);
       }
-      if(res.status === 403 || res.status === 500) {
-        const errorInfo = {code: -1, message: '未知错误！'};
-        try{
-          const data = new Function('return ' + res.data)() || {};
-          if(data.code === 0 || data.code) errorInfo.code = data.code;
-          if(data.message) errorInfo.message = data.message;
-          if(!data.message) console.error(data);
-        }catch(error) {
-          errorInfo.message = res.data;
+      //***网络连接失败，进行少许无感知重试
+      if(code === 'ECONNABORTED' || message === 'Network Error') {
+        if(this.requestRetry[config.url] < 3) {
+          this.requestRetry[config.url] ++;
+          app.log(`网络连接失败，即将自动无感知重试，第${this.requestRetry[config.url]}次`);
+          if(message === 'Network Error') {
+            return new Promise(ok => {
+              setTimeout(() => {
+                ok(axios.request(config));
+              }, 1000);
+            });
+          }else {
+            return axios.request(config);
+          }
         }
-        vm.$indicator.hide();
-        //action
-        switch (errorInfo.code) {
-          case 10001:
+        //if(code === 'ECONNABORTED') vm.$message.error(`网络连接超时，请重试一次`);
+        //if(message === 'Network Error') vm.$message.error(`网络连接超时，请重试一次`);
+        delete this.requestRetry[config.url];
+      }
+      //***网络请求成功，对服务器错误进行全局处理
+      else if(response) {
+        if(response.status === 403 || response.status === 500) {
+          const errorInfo = {code: -1, message: '未知错误！'};
+          errorInfo.code = response.status || response.code;
+          errorInfo.message = response.message;
+          if(response.data) {
+            if(response.data.stack) errorInfo.message = response.data.message;
+            if(response.data.stack) errorInfo.stack = response.data.stack;
+          }
+          //action
+          switch (errorInfo.code) {
+            case 10001:
 
-            break;
-          default:
-            app.$toastHook = vm.$toast(`[${errorInfo.code}] ${errorInfo.message}`);
-            break;
+              break;
+            default:
+              //vm.$message.error(`[${errorInfo.code}] ${errorInfo.message}`);
+              break;
+          }
         }
       }
+      return Promise.reject(error);
     });
   },
 }

@@ -13,7 +13,7 @@
  */
 module.exports.pages = {
   libraries: {
-    'libs': ['vue', 'vue-router'],
+    'libs': ['vue', 'vue-router', 'vuex'],
   },
   pages: [
     {

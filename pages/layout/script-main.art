@@ -1,8 +1,8 @@
 <script id="config-script">
   var app = {};
   app.page = {};
+  app.env = {{ $imports.stringify(sails.env) }};
   app.debug = {{ $imports.stringify(sails.debug) }};
-  app.device = {{ $imports.stringify(device) }};
   app.macros = {{ $imports.stringify(sails.publicMacros) }};
 
   if(!app.debug) {
