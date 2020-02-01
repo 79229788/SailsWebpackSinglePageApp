@@ -58,11 +58,16 @@ module.exports.views = {
         isAndroid: mobileDetect.is('AndroidOS'),
         isIPhone: mobileDetect.is('iPhone'),
         isIPad: mobileDetect.is('iPad'),
-        isWeChat: userAgent ? userAgent.indexOf('MicroMessenger') > 0 : false,
-        isWeChatDevTool: userAgent ? userAgent.indexOf('wechatdevtools') > 0 : false,
-        isDingTalk: userAgent ? userAgent.indexOf('DingTalk') > 0 : false,
+        isWeChat: userAgent.indexOf('MicroMessenger') > 0,
+        isWeChatDevTool: userAgent.indexOf('wechatdevtools') > 0,
+        isWechatPC: userAgent.indexOf('WindowsWechat') > 0 || userAgent.indexOf('MacWechat') > 0,
+        isWechatPC_Win: userAgent.indexOf('WindowsWechat') > 0 && userAgent.indexOf('MacWechat') < 0,
+        isWechatPC_Mac: userAgent.indexOf('MacWechat') > 0,
+        isQQBrowser: userAgent.indexOf('MQQBrowser') > 0,
+        isDingTalk: userAgent.indexOf('DingTalk') > 0,
         androidVersion: mobileDetect.version('Android') || -1,
         iosVersion: mobileDetect.version('iOS') || -1,
+        webKitVersion: mobileDetect.version('Webkit'),
       };
       cb(null, template(path, data));
     }
