@@ -116,7 +116,7 @@ export default {
       else if(response) {
         if(response.status === 403 || response.status === 500) {
           const errorInfo = {code: -1, message: '未知错误！'};
-          errorInfo.code = response.status || response.code;
+          errorInfo.code = response.data.code || response.status;
           errorInfo.message = response.message;
           if(response.data) {
             if(response.data.stack) errorInfo.message = response.data.message;

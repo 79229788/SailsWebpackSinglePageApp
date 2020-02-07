@@ -8,20 +8,20 @@ module.exports.webpack = function (sails) {
   const paths = sails.config['webpack-paths'](sails);
   const isDev = sails.config.environment === 'development' && !sails.config.hot;
   const isHotDev = sails.config.environment === 'development' && !!sails.config.hot;
-  const isPro = sails.config.environment === 'production' && !sails.config.deploy;
+  const isProd = sails.config.environment === 'production' && !sails.config.deploy;
   const isDeploy = sails.config.environment === 'production' && !!sails.config.deploy;
   let webpackPlugins = [];
   let webpackLoaders = [];
   plugins.forEach(function (plugin) {
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isHotDev && plugin.env.indexOf('hot-dev') > -1) webpackPlugins.push(plugin.res);
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isDev && plugin.env.indexOf('dev') > -1) webpackPlugins.push(plugin.res);
-    if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isPro && plugin.env.indexOf('prod') > -1) webpackPlugins.push(plugin.res);
+    if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isProd && plugin.env.indexOf('prod') > -1) webpackPlugins.push(plugin.res);
     if((_.isUndefined(plugin.enabled) || plugin.enabled === true) && isDeploy && plugin.env.indexOf('deploy') > -1) webpackPlugins.push(plugin.res);
   });
   loaders.forEach(function (loader) {
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isHotDev && loader.env.indexOf('hot-dev') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDev && loader.env.indexOf('dev') > -1) webpackLoaders.push(loader.res);
-    if((_.isUndefined(loader.enabled) || loader.enabled === true) && isPro && loader.env.indexOf('prod') > -1) webpackLoaders.push(loader.res);
+    if((_.isUndefined(loader.enabled) || loader.enabled === true) && isProd && loader.env.indexOf('prod') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDeploy && loader.env.indexOf('deploy') > -1) webpackLoaders.push(loader.res);
   });
   //设置入口项和页面配置
@@ -71,7 +71,23 @@ module.exports.webpack = function (sails) {
     webpackEntry['libs'].unshift('webpack/hot/dev-server');
     webpackEntry['libs'].unshift('webpack-dev-server/client?'+ sails.macros.KDebugHostUrl +':3000/');
   }
-
+  const optimization = {};
+  if(isDeploy || isProd) {
+    optimization.splitChunks = {
+      chunks: 'all',
+      minChunks: 2,
+      minSize: 10 * 1000,
+      maxSize: 500 * 1000,
+      cacheGroups: {
+        common: {
+          name: 'libs',
+          chunks: 'all',
+          priority: 10,
+          minChunks: 2,
+        },
+      }
+    }
+  }
   return {
     config: {
       options: {
@@ -96,22 +112,7 @@ module.exports.webpack = function (sails) {
           rules: webpackLoaders
         },
         plugins: webpackPlugins,
-        optimization: {
-          splitChunks: {
-            chunks: 'all',
-            minChunks: 2,
-            minSize: 10 * 1000,
-            maxSize: 500 * 1000,
-            cacheGroups: {
-              common: {
-                name: 'libs',
-                chunks: 'all',
-                priority: 10,
-                minChunks: 2,
-              },
-            }
-          }
-        },
+        optimization: optimization,
       }
     },
     hotMode: {
