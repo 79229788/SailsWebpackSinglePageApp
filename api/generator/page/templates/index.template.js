@@ -31,7 +31,7 @@
     //**************************************************************
     //**************************************************************
     components: {
-      'module-<%=moduleName%>': require('./modules/<%=moduleName%>'),
+      'module-<%=moduleName%>': require('./modules/<%=moduleName%>').default,
     },
     data: function () {
       return {
