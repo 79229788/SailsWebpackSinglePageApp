@@ -3,6 +3,7 @@ module.exports['webpack-paths'] = function (sails) {
     //libs
     'vue$': 'vue/dist/vue.common.js',
     'vue-router': 'vue-router/dist/vue-router.js',
+    'comber': sails.paths.assets + '/javascript/libs/comber/index.js',
 
     //custom
     'assets': sails.paths.assets,

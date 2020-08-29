@@ -260,4 +260,59 @@ export default {
     }
     return flag;
   },
+  /**
+   * 对比版本
+   * @param v1
+   * @param v2
+   * @return {number}
+   */
+  compareVersion: function(v1, v2) {
+    if(!v1 || !v2) return -1;
+    v1 = v1.split('.');
+    v2 = v2.split('.');
+    const len = Math.max(v1.length, v2.length);
+    while(v1.length < len) v1.push('0');
+    while(v2.length < len) v2.push('0');
+    for(let i = 0; i < len; i++) {
+      const num1 = parseInt(v1[i])
+      const num2 = parseInt(v2[i])
+      if(num1 > num2) return 1;
+      if(num1 < num2) return -1;
+    }
+    return 0;
+  },
+  /**
+   * 检查身份证格式是否合法
+   * @param idCard
+   * @return {boolean}
+   */
+  checkIdCard: function(idCard) {
+    // 15位和18位身份证号码的正则表达式
+    const regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+    // 如果通过该验证，说明身份证格式正确，但准确性还需计算
+    if(regIdCard.test(idCard)) {
+      if(idCard.length === 18) {
+        // 将前17位加权因子保存在数组里
+        const idCardWi = new Array(7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2);
+        // 这是除以11后，可能产生的11位余数、验证码，也保存成数组
+        const idCardY = new Array(1,0,10,9,8,7,6,5,4,3,2);
+        // 用来保存前17位各自乖以加权因子后的总和
+        let idCardWiSum = 0;
+        for(let i = 0; i < 17; i++) {
+          idCardWiSum += idCard.substring(i, i + 1) * idCardWi[i];
+        }
+        const idCardMod = idCardWiSum % 11;// 计算出校验码所在数组的位置
+        const idCardLast = idCard.slice(-1);// 得到最后一位身份证号码
+        // 如果等于2，则说明校验码是10，身份证号码最后一位应该是X
+        if(idCardMod === 2) {
+          return idCardLast === 'X' || idCardLast === 'x';
+        }else {
+          // 用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
+          return Number(idCardLast) === idCardY[idCardMod];
+        }
+      }
+      return true;
+    }
+    return false;
+  },
 };

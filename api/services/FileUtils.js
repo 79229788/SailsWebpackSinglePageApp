@@ -24,19 +24,13 @@ module.exports = {
     try {
       mode = mode || 0o777;
       if(!fs.existsSync(dirPath)) {
-        let pathTmp = '';
         const dirNames = dirPath.split('/');
-        dirNames.shift();
-        dirNames.forEach(dirName => {
-          if(pathTmp) {
-            pathTmp = pathUtils.join(pathTmp, dirName);
-          }else {
-            pathTmp = dirName;
+        for (let i = 2; i <= dirNames.length; i ++) {
+          const path = dirPath.split('/').slice(0, i).join('/');
+          if(!fs.existsSync(path)) {
+            fs.mkdirSync(path, mode);
           }
-          if(!fs.existsSync('/' + pathTmp)) {
-            fs.mkdirSync('/' + pathTmp, mode);
-          }
-        })
+        }
       }
     }catch (error) {
       throw error;
@@ -50,6 +44,10 @@ module.exports = {
    */
   readFile: async function (dirPath, filename = '') {
     try {
+      if(!filename) {
+        filename = _.last(dirPath.split('/'));
+        dirPath = dirPath.replace(`/${filename}`, '');
+      }
       const filePath = pathUtils.join(dirPath, filename);
       if(!fs.existsSync(dirPath)) return '';
       return fs.readFileSync(filePath, 'utf-8');
@@ -67,6 +65,10 @@ module.exports = {
    */
   writeFile: async function (dirPath, filename, text, isOverride = true) {
     try {
+      if(!filename) {
+        filename = _.last(dirPath.split('/'));
+        dirPath = dirPath.replace(`/${filename}`, '');
+      }
       const filePath = pathUtils.join(dirPath, filename);
       if(!fs.existsSync(dirPath)) {
         await this.createDir(dirPath);
@@ -80,19 +82,23 @@ module.exports = {
   /**
    * 追加内容到文件
    *
-   * @param dirPath   目录路径
-   * @param filename  文件名
-   * @param text      写入文本
+   * @param dirPath     目录路径
+   * @param filename    文件名
+   * @param text        写入文本
    * @return {Promise.<*>}
    */
   appendFile: async function (dirPath, filename, text) {
     try {
+      if(!filename) {
+        filename = _.last(dirPath.split('/'));
+        dirPath = dirPath.replace(`/${filename}`, '');
+      }
       const filePath = pathUtils.join(dirPath, filename);
       if(!fs.existsSync(dirPath)) {
         await this.createDir(dirPath);
-        return fs.appendFileSync(filePath, text);
+        return fs.writeFileSync(filePath, text);
       }
-      if(isOverride) fs.appendFileSync(filePath, text);
+      fs.appendFileSync(filePath, text);
     }catch (error) {
       throw error;
     }
@@ -103,6 +109,7 @@ module.exports = {
    * @return {Promise.<Array>}
    */
   getFileList: async function (dirPath) {
+    if(!(await this.existFile(dirPath))) return [];
     const files = [];
     const filePaths = await this.getFilePathList(dirPath);
     for(let path of filePaths) {
@@ -118,6 +125,7 @@ module.exports = {
    * @param dirPath 目录路径
    */
   getFilePathList: async function (dirPath) {
+    if(!(await this.existFile(dirPath))) return [];
     const paths = [];
     (function getList(dirPath) {
       const files = fs.readdirSync(dirPath);

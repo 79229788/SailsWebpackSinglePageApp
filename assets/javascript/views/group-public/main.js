@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import FastClick from 'fastclick';
 import axios from 'axios';
+import Comber from 'comber';
 
 //**********
 import './app';
@@ -13,31 +14,51 @@ export default {
    */
   initConfig: function (vm) {
     FastClick.attach(document.body);
-    Vue.config.devtools = vm.debug;
+    Vue.config.devtools = vm.DEBUG;
+    Comber.config = {
+      apiUrl: '',
+      debug: vm.DEBUG,
+      storage: {
+        maxSize: 2000,
+        clearSize: 1700
+      },
+      alert: function (text) {
+        return alert(text);
+      },
+      beforeGetHandler: function (opts) {
+        return opts;
+      },
+      beforePostHandler: function (opts) {
+        return opts;
+      },
+      dataHandler: function (data) {
+        return data;
+      }
+    };
   },
   /**
    * 初始化数据
    */
-  initData: function (rootVm) {
+  initData: function (vm) {
     //记录导航信息
     const rootPath = location.hash.indexOf('#/') === 0
       ? location.hash.split('?')[0].slice(1)
       : location.pathname;
-    rootVm.$store.commit('pushNavigationFlow', rootPath);
+    vm.$store.commit('pushNavigationFlow', rootPath);
   },
   /**
    * 处理全局路由afterEach
-   * @param rootVm
+   * @param vm
    * @param to
    * @param from
    */
-  handleRouterAfterEach: function (rootVm, to, from) {
-    //rootVm.$loadingBar.finish();
+  handleRouterAfterEach: function (vm, to, from) {
+    //vm.$loadingBar.finish();
     //恢复页面滚动位置
-    const prevPosition = rootVm.$store.state.prevPosition[to.path];
-    const recoverLeft = rootVm.$store.state.navigationBackward
+    const prevPosition = vm.$store.state.prevPosition[to.path];
+    const recoverLeft = vm.$store.state.navigationBackward
       && prevPosition && prevPosition.x || 0;
-    const recoverTop = rootVm.$store.state.navigationBackward
+    const recoverTop = vm.$store.state.navigationBackward
       && prevPosition && prevPosition.y || 0;
     setTimeout(() => {
       window.scrollTo(recoverLeft, recoverTop);
@@ -45,16 +66,16 @@ export default {
   },
   /**
    * 处理全局路由beforeEach
-   * @param rootVm
+   * @param vm
    * @param to
    * @param from
    * @param next
    */
-  handleRouterBeforeEach: function (rootVm, to, from, next) {
-    //rootVm.$loadingBar.start();
-    rootVm.$store.commit('pushNavigationFlow', to.path);
-    rootVm.$store.commit('prevRoute', from);
-    rootVm.$store.commit('prevPosition', {
+  handleRouterBeforeEach: function (vm, to, from, next) {
+    //vm.$loadingBar.start();
+    vm.$store.commit('pushNavigationFlow', to.path);
+    vm.$store.commit('prevRoute', from);
+    vm.$store.commit('prevPosition', {
       from: from.path,
       x: app.page.getScrollLeft(),
       y: app.page.getScrollTop(),
@@ -119,7 +140,7 @@ export default {
           errorInfo.code = response.data.code || response.status;
           errorInfo.message = response.message;
           if(response.data) {
-            if(response.data.stack) errorInfo.message = response.data.message;
+            if(response.data.message) errorInfo.message = response.data.message;
             if(response.data.stack) errorInfo.stack = response.data.stack;
           }
           //action

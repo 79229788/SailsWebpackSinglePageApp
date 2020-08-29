@@ -2,7 +2,8 @@
   "generators": {
     "modules": {
       "page": "api/generator/page",
-      "page-module": "api/generator/page-module"
+      "page-module": "api/generator/page-module",
+      "frontmodel": "api/generator/frontmodel"
     }
   },
   "hooks": {
