@@ -1,9 +1,11 @@
 const FileUtils = require('./utils/FileUtils');
 const artTemplate = require('art-template');
 const _ = require('lodash');
+const currentJSFileMap = {};
 
 function HtmlWebpackInjectPlugin(options) {
   this.options = _.extend({
+    development: false,
     templatePath: '',
     parseTemplate: '',
     templateOptions: {},
@@ -43,6 +45,7 @@ Object.assign(HtmlWebpackInjectPlugin.prototype, {
             const name = chunk.name.split('~')[0];
             if(!chunksMap[name]) chunksMap[name] = [];
             chunk.files.forEach(file => chunksMap[name].push(file));
+            currentJSFileMap[name]
           });
           this.options.chunks.forEach(name => {
             chunksMap[name].forEach(file => {
@@ -61,7 +64,9 @@ Object.assign(HtmlWebpackInjectPlugin.prototype, {
             cssString += `<link href="${file}" rel="stylesheet">\n`;
           });
           jsFiles.forEach(file => {
-            jsString += `<script src="${file}" type="text/javascript" crossorigin="anonymous"></script>\n`
+            const version = this.options.development
+              ? `?t=${Date.parse(new Date()) / 1000}` : '';
+            jsString += `<script src="${file + version}" type="text/javascript" crossorigin="anonymous"></script>\n`
           });
           const compiled = _.template(templateContent);
           templateContent = compiled({

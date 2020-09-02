@@ -82,9 +82,9 @@ module.exports = {
   /**
    * 追加内容到文件
    *
-   * @param dirPath   目录路径
-   * @param filename  文件名
-   * @param text      写入文本
+   * @param dirPath     目录路径
+   * @param filename    文件名
+   * @param text        写入文本
    * @return {Promise.<*>}
    */
   appendFile: async function (dirPath, filename, text) {
@@ -96,9 +96,9 @@ module.exports = {
       const filePath = pathUtils.join(dirPath, filename);
       if(!fs.existsSync(dirPath)) {
         await this.createDir(dirPath);
-        return fs.appendFileSync(filePath, text);
+        return fs.writeFileSync(filePath, text);
       }
-      if(isOverride) fs.appendFileSync(filePath, text);
+      fs.appendFileSync(filePath, text);
     }catch (error) {
       throw error;
     }

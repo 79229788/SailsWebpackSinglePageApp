@@ -38,6 +38,7 @@ module.exports.webpack = function (sails) {
     }
     webpackPlugins.push(
       new HtmlWebpackInjectPlugin({
+        development: isDev || isHotDev,
         templatePath: sails.paths.pages + obj.mainHtml,
         parseTemplate: obj.isStatic,
         output: templateOutput,
@@ -69,7 +70,8 @@ module.exports.webpack = function (sails) {
   );
   if(isHotDev) {
     webpackEntry['libs'].unshift('webpack/hot/dev-server');
-    webpackEntry['libs'].unshift('webpack-dev-server/client?'+ sails.macros.KDebugHostUrl +':3000/');
+    webpackEntry['libs'].unshift('webpack-dev-server/client?'
+      + sails.macros.KDebugHostUrl +':3000/');
   }
   const optimization = {};
   if(isDeploy || isProd) {
@@ -99,8 +101,12 @@ module.exports.webpack = function (sails) {
         entry: webpackEntry,
         output: {
           path: isDeploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
-          filename: isHotDev ? 'javascript/[name].[hash:8].js' : 'javascript/[name].[chunkHash:8].js',
-          chunkFilename: isHotDev ? 'javascript/[name].chunk.[hash:8].js' : 'javascript/[name].chunk.[chunkHash:8].js',
+          filename: isDev || isHotDev
+            ? 'javascript/[name].js'
+            : 'javascript/[name].[chunkHash:8].js',
+          chunkFilename: isDev || isHotDev
+            ? 'javascript/[name].chunk.js'
+            : 'javascript/[name].chunk.[chunkHash:8].js',
           publicPath: isDeploy ? (sails.macros.KCdnUrl + '/assets/') : '/',
           crossOriginLoading: 'anonymous',
         },
