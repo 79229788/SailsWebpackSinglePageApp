@@ -1,5 +1,7 @@
 //https://webpack.js.org/configuration/
 const _ = require('lodash');
+const path = require('path');
+const fs = require('fs');
 const HtmlWebpackInjectPlugin = require('../node_plugins/html-webpack-inject-plugin');
 
 module.exports.webpack = function (sails) {
@@ -24,9 +26,20 @@ module.exports.webpack = function (sails) {
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isProd && loader.env.indexOf('prod') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDeploy && loader.env.indexOf('deploy') > -1) webpackLoaders.push(loader.res);
   });
+  //获取开发启动页配置数据
+  const devLaunchConfigPath = path.join(__dirname, '../.devlaunch');
+  let devLaunchPages = [];
+  if((isDev || isHotDev) && fs.existsSync(devLaunchConfigPath)) {
+    const devLaunchConfigData = JSON.parse(
+      fs.readFileSync(devLaunchConfigPath, 'utf-8') || '{}');
+    if(devLaunchConfigData.pages) {
+      devLaunchPages = _.uniq(_.compact(devLaunchConfigData.pages));
+    }
+  }
   //设置入口项和页面配置
   const webpackEntryPages = {};
   sails.config.pages.pages.forEach(function (obj) {
+    if(devLaunchPages.length > 0 && devLaunchPages.indexOf(obj.name) < 0) return;
     if(obj.mainJs) webpackEntryPages['chunk-' + obj.name] = sails.paths.assetJs + obj.mainJs;
     const chunks = _.union(obj.otherJs || [], ['chunk-' + obj.name]);
     let templateOutput = sails.paths._pages + obj.mainHtml;
@@ -61,7 +74,6 @@ module.exports.webpack = function (sails) {
       })
     );
   });
-
   //入口文件
   const webpackEntry = _.extend(
     {},
