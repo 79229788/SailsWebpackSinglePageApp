@@ -75,6 +75,15 @@ sails generagte ...                                 //sails自带生成器，省
 
 5. config/webpack-plugins.js ------> webpack 插件配置
 
-
+6. 根目录创建.devlaunch，可配置开发时仅启动的页面组
+    ```json
+      {
+        "pages": [
+          "group-auth",
+          "group-app",
+          ""
+        ]
+      }
+    ```
 
 
