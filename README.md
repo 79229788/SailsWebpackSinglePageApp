@@ -36,9 +36,9 @@ sails lift --only --deploy  //仅仅部署       （一般当生产部署模式�
 ### 5. 生成器
 
 ```
-sails generagte page <groupName> <pageName> <moduleName>              //生成新页面文件
-sails generagte page-module <groupName> <pageName> <moduleName>        //生成页面模块
-sails generagte ...                                 //sails自带生成器，省略..
+sails generate page <groupName> <pageName> <moduleName>              //生成新页面文件
+sails generate page-module <groupName> <pageName> <moduleName>        //生成页面模块
+sails generate ...                                 //sails自带生成器，省略..
 ```
 ###### [浏览官方文档--自带生成器，点击查看](https://0.12.sailsjs.com/documentation/reference/command-line-interface/sails-generate)
 
