@@ -1,5 +1,6 @@
 const FileUtils = require('./utils/FileUtils');
 const artTemplate = require('art-template');
+const path = require('path');
 const _ = require('lodash');
 const currentJSFileMap = {};
 
@@ -11,6 +12,7 @@ function HtmlWebpackInjectPlugin(options) {
     templateOptions: {},
     templateData: {},
     output: '',
+    publicPath: '/',
     title: '',
     keywords: '',
     description: '',
@@ -49,8 +51,8 @@ Object.assign(HtmlWebpackInjectPlugin.prototype, {
           });
           this.options.chunks.forEach(name => {
             chunksMap[name].forEach(file => {
-              if(/.*?.css$/.test(file)) cssFiles.push('/' + file);
-              if(/.*?.js$/.test(file)) jsFiles.push('/' + file);
+              if(/.*?.css$/.test(file)) cssFiles.push(this.options.publicPath + file);
+              if(/.*?.js$/.test(file)) jsFiles.push(this.options.publicPath + file);
             });
           });
           let templateContent = '';

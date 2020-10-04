@@ -18,6 +18,7 @@ module.exports['webpack-plugins'] = function (sails) {
       //分离CSS样式文件
       res: new MiniCssExtractPlugin({
         filename: 'styles/[name].[contenthash:8].css',
+        ignoreOrder: true
       }),
       env: ['prod', 'deploy'],
       enabled: true

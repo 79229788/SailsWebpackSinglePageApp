@@ -10,6 +10,7 @@ module.exports.webpack = function (sails) {
   const paths = sails.config['webpack-paths'](sails);
   const isDev = sails.config.environment === 'development' && !sails.config.hot;
   const isHotDev = sails.config.environment === 'development' && !!sails.config.hot;
+  const isChildDev = sails.config.environment === 'development' && !!sails.config.child;
   const isProd = sails.config.environment === 'production' && !sails.config.deploy;
   const isDeploy = sails.config.environment === 'production' && !!sails.config.deploy;
   let webpackPlugins = [];
@@ -26,6 +27,19 @@ module.exports.webpack = function (sails) {
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isProd && loader.env.indexOf('prod') > -1) webpackLoaders.push(loader.res);
     if((_.isUndefined(loader.enabled) || loader.enabled === true) && isDeploy && loader.env.indexOf('deploy') > -1) webpackLoaders.push(loader.res);
   });
+  //配置出口信息
+  const webpackOutput = {
+    path: sails.paths.tmpAssets,
+    filename: 'javascript/[name].[chunkHash:8].js',
+    chunkFilename: 'javascript/[name].chunk.[chunkHash:8].js',
+    publicPath: '/',
+    crossOriginLoading: 'anonymous'
+  };
+  if(isDeploy) webpackOutput.path = sails.paths.wwwAssets;
+  if(isDeploy) webpackOutput.publicPath = sails.macros.KCdnUrl + '/assets/';
+  if(isDev || isHotDev) webpackOutput.filename = 'javascript/[name].js';
+  if(isDev || isHotDev) webpackOutput.chunkFilename = 'javascript/[name].chunk.js';
+  if(isChildDev) webpackOutput.publicPath = '/childName/';
   //获取开发启动页配置数据
   const devLaunchConfigPath = path.join(__dirname, '../.devlaunch');
   let devLaunchPages = [];
@@ -55,6 +69,7 @@ module.exports.webpack = function (sails) {
         templatePath: sails.paths.pages + obj.mainHtml,
         parseTemplate: obj.isStatic,
         output: templateOutput,
+        publicPath: webpackOutput.publicPath,
         title: obj.title || 'Sails App',
         keywords: (obj.keywords || []).join(','),
         description: obj.description || '',
@@ -74,7 +89,8 @@ module.exports.webpack = function (sails) {
       })
     );
   });
-  //入口文件
+
+  //设置入口文件
   const webpackEntry = _.extend(
     {},
     sails.config.pages.libraries || {},
@@ -82,16 +98,17 @@ module.exports.webpack = function (sails) {
   );
   if(isHotDev) {
     webpackEntry['libs'].unshift('webpack/hot/dev-server');
-    webpackEntry['libs'].unshift('webpack-dev-server/client?'
-      + sails.macros.KDebugHostUrl +':3000/');
+    webpackEntry['libs'].unshift('webpack-dev-server/client?'+ sails.macros.KDebugHostUrl +':3000/');
   }
   const optimization = {};
   if(isDeploy || isProd) {
     optimization.splitChunks = {
       chunks: 'all',
       minChunks: 2,
-      minSize: 10 * 1000,
-      maxSize: 500 * 1000,
+      minSize: 1000 * 1000,
+      maxSize: 1000 * 1000,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
       cacheGroups: {
         common: {
           name: 'libs',
@@ -111,17 +128,7 @@ module.exports.webpack = function (sails) {
           alias: paths,
         },
         entry: webpackEntry,
-        output: {
-          path: isDeploy ? sails.paths.wwwAssets : sails.paths.tmpAssets,
-          filename: isDev || isHotDev
-            ? 'javascript/[name].js'
-            : 'javascript/[name].[chunkHash:8].js',
-          chunkFilename: isDev || isHotDev
-            ? 'javascript/[name].chunk.js'
-            : 'javascript/[name].chunk.[chunkHash:8].js',
-          publicPath: isDeploy ? (sails.macros.KCdnUrl + '/assets/') : '/',
-          crossOriginLoading: 'anonymous',
-        },
+        output: webpackOutput,
         devtool: isDev || isHotDev ? 'none' : 'source-map',
         performance: {
           hints: false,
