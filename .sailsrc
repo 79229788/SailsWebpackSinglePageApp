@@ -3,12 +3,16 @@
     "modules": {
       "page": "api/generator/page",
       "page-module": "api/generator/page-module",
+      "page-component": "api/generator/page-component",
+      "group-component": "api/generator/group-component",
       "frontmodel": "api/generator/frontmodel"
     }
   },
   "hooks": {
     "grunt": false,
-    "session": false
+    "session": false,
+    "pubsub": false,
+    "sockets": false
   },
   "paths": {
 

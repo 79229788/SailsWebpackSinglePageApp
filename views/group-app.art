@@ -5,8 +5,8 @@
 {{ block 'stylesheets' }}
 {{ /block }}
 {{ block 'scripts' }}
-<script src="/javascript/libs.c445da6b.js" type="text/javascript" crossorigin="anonymous"></script>
-<script src="/javascript/chunk-group-app.5471b256.js" type="text/javascript" crossorigin="anonymous"></script>
+<script src="/javascript/libs.js?t=1601808124" type="text/javascript" crossorigin="anonymous"></script>
+<script src="/javascript/chunk-group-app.js?t=1601808124" type="text/javascript" crossorigin="anonymous"></script>
 {{ /block }}
 
 {{ block 'content' }}

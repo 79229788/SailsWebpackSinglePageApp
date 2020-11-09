@@ -26,7 +26,9 @@
     created: function () {
       this.initData();
     },
-    mounted: function () {},
+    reset: function (scene, data) {
+      this.resetData(scene, data);
+    },
     methods: {
       //*********************************内置方法
       //***************************
@@ -35,7 +37,7 @@
 
       },
       //**********重置数据
-      resetData: function () {
+      resetData: function (scene, data) {
 
         this.initData();
       },

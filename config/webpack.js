@@ -83,7 +83,11 @@ module.exports.webpack = function (sails) {
           },
         },
         templateData: {
-          sails: {},
+          sails: {
+            env: sails.env,
+            debug: sails.debug,
+            publicMacros: sails.publicMacros,
+          },
           device: {},
         }
       })
